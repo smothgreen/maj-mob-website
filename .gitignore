@@ -1,0 +1,26 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Gemini/Agent Temp Files
+.gemini/
+*verify_build.py
+*match_all_media_to_text.py
+*match_links_to_text.py
+*find_all_images_fixed.py
+*inspect_portraits.py
+*dump_full_image_details.py
+*dump_bosses_page_images.py
+*find_caren_image.py
+*find_caren_assets.py
+*find_images.py
+*find_schedule_links.py
+*parse_canva_text.py
+*extract_html.py
+*inspect_media.py
+*map_assets.py
+*dump_all_links.py
+*print_caren_snippet.py
+*print_raw_link_structures.py
+*dump_all_page_media.py
+*find_all_images_in_document.py
