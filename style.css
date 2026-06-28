@@ -471,6 +471,11 @@ header.scrolled .logo-link img {
   background-color: var(--secondary);
 }
 
+.boss-card.caren .boss-img-wrapper {
+  height: auto;
+  aspect-ratio: 1024 / 733;
+}
+
 .boss-info {
   padding: 2rem;
   flex-grow: 1;
@@ -1299,5 +1304,232 @@ footer {
   .footer-bottom {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+/* ==========================================================================
+   Kids Mini Mahj Page Styles
+   ========================================================================== */
+
+/* Active Link State specific to kids page */
+.nav-link.active-page::after {
+  width: 80%;
+}
+
+/* Benefits Grid Styling */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.benefit-card {
+  background-color: var(--bg-white);
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.benefit-number {
+  width: 45px;
+  height: 45px;
+  background-color: var(--secondary-alpha);
+  color: var(--secondary);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.benefit-card h3 {
+  font-size: 1.25rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.benefit-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* Offerings Grid Styling */
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 900px;
+  margin: 3rem auto 0 auto;
+}
+
+.offer-card {
+  background-color: var(--bg-white);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--secondary);
+}
+
+.offer-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background-color: var(--accent-tile);
+}
+
+.offer-card:nth-child(even)::before {
+  background-color: var(--secondary);
+}
+
+.offer-icon-box {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.offer-card h3 {
+  font-size: 1.4rem;
+  color: var(--primary);
+  margin-bottom: 0.8rem;
+}
+
+.offer-card p {
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* Kids CTA Panel Gradient */
+.kids-cta-panel {
+  background: linear-gradient(135deg, rgba(63, 20, 141, 0.05) 0%, rgba(250, 27, 122, 0.05) 50%, rgba(253, 120, 6, 0.05) 100%);
+  border-radius: var(--border-radius-lg);
+  padding: 4rem;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.kids-cta-panel h2 {
+  font-size: 2.2rem;
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+}
+
+.kids-cta-panel p {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  max-width: 750px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.7;
+}
+
+.kids-cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive overrides */
+@media (max-width: 1024px) {
+  .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .offers-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+  
+  .kids-cta-panel {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+/* Kids Promo Panel for Shop Sets */
+.kids-promo-panel {
+  background: var(--bg-white);
+  border-radius: var(--border-radius-lg);
+  padding: 4rem 3rem;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-md);
+}
+
+.promo-coupon-box {
+  background-color: var(--bg-warm);
+  border: 2px dashed var(--secondary);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  display: inline-block;
+  margin-bottom: 2.5rem;
+}
+
+.promo-coupon-box p {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.promo-coupon-box .coupon-code {
+  margin-top: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+.coupon-code span {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--border-radius-sm);
+  font-family: monospace;
+}
+
+@media (max-width: 768px) {
+  .kids-promo-panel {
+    padding: 2.5rem 1.5rem;
   }
 }
