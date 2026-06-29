@@ -1215,6 +1215,7 @@ footer {
     transition: var(--transition-smooth);
     box-shadow: var(--shadow-lg);
     align-items: stretch;
+    overflow-y: auto;
   }
   
   .nav-menu.open {

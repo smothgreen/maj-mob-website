@@ -142,18 +142,40 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add slightly larger offset to accommodate header spacing
         const offset = 90;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = targetElement.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
+        const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = elementPosition - offset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+        // Use a short delay to let mobile menu close transitions & overflow reset complete
+        setTimeout(() => {
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 50);
       }
     });
   });
+
+  // ==========================================================================
+  // Handle hash scrolling on page load (e.g. when coming from another page)
+  // ==========================================================================
+  if (window.location.hash) {
+    const targetElement = document.querySelector(window.location.hash);
+    if (targetElement) {
+      // Wait for page resources to fully load so scroll height is accurate
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const offset = 90;
+          const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 200);
+      });
+    }
+  }
 
   // ==========================================================================
   // Interactive Contact Form Feedback
