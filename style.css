@@ -278,6 +278,8 @@ header.scrolled .logo-link img {
   padding: 0.5rem 0.8rem;
   border-radius: var(--border-radius-sm);
   position: relative;
+  display: inline-block;
+  text-align: center;
 }
 
 .nav-link::after {
