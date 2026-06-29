@@ -1240,6 +1240,16 @@ footer {
     display: none;
   }
 
+  .nav-menu .btn {
+    font-size: 1.3rem;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--border-radius-md);
+  }
+
   .hamburger {
     display: block;
   }

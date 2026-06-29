@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('nav-menu');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link, .nav-menu .btn');
 
   const toggleMenu = () => {
     const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
