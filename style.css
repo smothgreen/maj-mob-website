@@ -1546,3 +1546,110 @@ footer {
     padding: 2.5rem 1.5rem;
   }
 }
+
+/* ==========================================================================
+   Multigenerational Event Section
+   ========================================================================== */
+.event-detail-panel {
+  background: var(--bg-warm);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  padding: 3rem;
+  max-width: 850px;
+  margin: 3rem auto 0 auto;
+}
+
+.event-detail-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.event-detail-header h3 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.event-detail-header p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.event-detail-body p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+}
+
+.event-locations-title {
+  font-size: 1.25rem;
+  color: var(--primary);
+  margin: 2rem 0 1.5rem 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.event-locations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.event-location-card {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.event-location-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-location-card h5 {
+  font-size: 1.1rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.event-location-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+}
+
+.event-location-dates {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.event-location-dates span {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+@media (max-width: 768px) {
+  .event-detail-panel {
+    padding: 2rem 1.5rem;
+  }
+  
+  .event-locations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
