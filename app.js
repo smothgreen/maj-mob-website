@@ -224,4 +224,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ==========================================================================
+  // Free Taste of Mini Mahj Registration Form
+  // ==========================================================================
+  const freeTasteForm = document.getElementById('free-taste-form');
+  const freeTasteStatus = document.getElementById('free-taste-status');
+
+  if (freeTasteForm) {
+    freeTasteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const submitBtn = freeTasteForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Reserving Spot...';
+      freeTasteStatus.className = 'form-feedback';
+      freeTasteStatus.style.display = 'none';
+
+      // Mock API call delay
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        
+        // Clear inputs
+        freeTasteForm.reset();
+        
+        // Show success status
+        freeTasteStatus.textContent = 'Success! Your free spot is reserved for Wednesday, July 15 at 1:00 PM at kiddywampus West End. We will email you confirmation details shortly!';
+        freeTasteStatus.classList.add('success');
+        freeTasteStatus.style.display = 'block';
+        freeTasteStatus.style.backgroundColor = 'rgba(12, 69, 36, 0.08)';
+        freeTasteStatus.style.border = '1px solid rgba(12, 69, 36, 0.2)';
+        freeTasteStatus.style.color = '#0c4524';
+        
+        // Auto hide message after 10 seconds
+        setTimeout(() => {
+          freeTasteStatus.style.opacity = '0';
+          setTimeout(() => {
+            freeTasteStatus.style.display = 'none';
+            freeTasteStatus.style.opacity = '1';
+          }, 400);
+        }, 10000);
+        
+      }, 1000);
+    });
+  }
+
 });
+
