@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         freeTasteForm.reset();
         
         // Show success status
-        freeTasteStatus.textContent = 'Success! Your free spot is reserved for Wednesday, July 15 at 1:00 PM at kiddywampus West End. We will email you confirmation details shortly!';
+        freeTasteStatus.textContent = 'Success! Your free spot is reserved for Wednesday, July 15 at 1:00 PM at Kiddywampus West End. We will email you confirmation details shortly!';
         freeTasteStatus.classList.add('success');
         freeTasteStatus.style.display = 'block';
         freeTasteStatus.style.backgroundColor = 'rgba(12, 69, 36, 0.08)';
