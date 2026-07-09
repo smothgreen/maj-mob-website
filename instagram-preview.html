@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instagram Post Staging Preview | Maj Mob</title>
-  <link rel="shortcut icon" href="_assets/images/logo.png">
-  <link rel="icon" href="_assets/images/logo.png" sizes="192x192">
-  <link rel="apple-touch-icon" href="_assets/images/logo.png" sizes="180x180">
+  <link rel="shortcut icon" href="_assets/images/logo.jpg?v=2">
+  <link rel="icon" href="_assets/images/logo.jpg?v=2" sizes="192x192">
+  <link rel="apple-touch-icon" href="_assets/images/logo.jpg?v=2" sizes="180x180">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -94,7 +94,7 @@
       height: 100%;
       border-radius: 50%;
       background-color: white;
-      background-image: url('_assets/images/logo.png');
+      background-image: url('_assets/images/logo.jpg?v=2');
       background-size: cover;
       background-position: center;
     }
@@ -232,7 +232,7 @@
       </div>
 
       <div class="card-image-container">
-        <img src="_assets/media/free-taste-flyer-v2.jpg" alt="Free Taste of Mini Mahj Class Flyer" class="card-image">
+        <img src="_assets/media/free-taste-flyer-v3.jpg" alt="Free Kids Mini Mahj Class Flyer" class="card-image">
       </div>
 
       <div class="card-actions">
@@ -292,13 +292,49 @@ We'll be playing with the colorful, kid-friendly Mini Mahjer sets to teach the b
 
 #MahJonggTwinCities #TwinCitiesParents #KidsActivitiesMN #kiddywampusWestEnd #MiniMahj #NonScreenTime #LimitedAvailability #MahjMob`;
 
-      navigator.clipboard.writeText(captionText).then(() => {
+      function fallbackCopyText(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          const successful = document.execCommand('copy');
+          if (successful) {
+            showToast();
+          } else {
+            console.error('Fallback copy command failed');
+            alert('Failed to copy. Please manually highlight and copy the caption below.');
+          }
+        } catch (err) {
+          console.error('Fallback copy failed', err);
+          alert('Failed to copy. Please manually highlight and copy the caption below.');
+        }
+
+        document.body.removeChild(textArea);
+      }
+
+      function showToast() {
         const toast = document.getElementById('toast');
         toast.classList.add('show');
         setTimeout(() => {
           toast.classList.remove('show');
         }, 2000);
-      });
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(captionText)
+          .then(showToast)
+          .catch(() => fallbackCopyText(captionText));
+      } else {
+        fallbackCopyText(captionText);
+      }
     }
   </script>
 </body>
