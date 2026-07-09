@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Post Staging Preview | Maj Mob</title>
+  <link rel="shortcut icon" href="_assets/images/logo.jpg?v=3">
+  <link rel="icon" href="_assets/images/logo.jpg?v=3" sizes="192x192">
+  <link rel="apple-touch-icon" href="_assets/images/logo.jpg?v=3" sizes="180x180">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #5c2d91;
+      --secondary: #ff5a5f;
+      --bg-light: #fafafa;
+      --border-color: #dbdbdb;
+      --text-dark: #262626;
+      --text-muted: #737373;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 935px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .header-bar {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .header-bar h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .header-bar p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Instagram Feed Card Layout */
+    .instagram-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    /* Card Header */
+    .card-header {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid #efefef;
+    }
+
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 12px;
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      padding: 2px;
+    }
+
+    .profile-pic-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: white;
+      background-image: url('_assets/images/logo.jpg?v=3');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .username {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .location {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Card Image */
+    .card-image-container {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #efefef;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Card Actions */
+    .card-actions {
+      padding: 12px 16px;
+      display: flex;
+      gap: 16px;
+      font-size: 1.5rem;
+    }
+
+    .icon-heart { color: #262626; }
+    .icon-comment { color: #262626; }
+    .icon-share { color: #262626; }
+
+    /* Card Caption Area */
+    .card-caption-section {
+      padding: 0 16px 16px 16px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .likes {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .caption-content {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .caption-username {
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    /* Copy Button container */
+    .action-panel {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .btn-copy {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(92, 45, 145, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy:hover {
+      background-color: #4b2375;
+      transform: translateY(-1px);
+    }
+
+    .btn-copy:active {
+      transform: translateY(1px);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      background-color: rgba(38, 38, 38, 0.9);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-bar">
+      <h1>Instagram Post Staging Preview</h1>
+      <p>Send this link to your partner so she can review the graphic and Caption 2 exactly as they'll appear on Instagram.</p>
+    </div>
+
+    <div class="instagram-card">
+      <div class="card-header">
+        <div class="profile-pic">
+          <div class="profile-pic-inner"></div>
+        </div>
+        <div class="user-info">
+          <span class="username">majmob</span>
+          <span class="location">kiddywampus West End</span>
+        </div>
+      </div>
+
+      <div class="card-image-container">
+        <img src="_assets/media/free-taste-flyer-v4.jpg" alt="Free Kids-Only Mini Mahj Class Flyer" class="card-image">
+      </div>
+
+      <div class="card-actions">
+        <span class="icon-heart">♡</span>
+        <span class="icon-comment">💬</span>
+        <span class="icon-share">✈️</span>
+      </div>
+
+      <div class="card-caption-section">
+        <div class="likes">Liked by minimahjer and others</div>
+        <div class="caption-content"><span class="caption-username">majmob</span>🀄 **FREE Kids Mini Mahj Intro Class! (SPOTS FILLING FAST)** 🀄
+
+Curious about Mah Jongg for kids? We are hosting a **FREE, 1-hour trial class designed specifically for kids and taught by Maj Mob**! Let your children experience the fun of Mah Jongg in a simplified, super-colorful way designed just for them. Give your kids a break from screens!
+
+🚨 **This is a rare, one-time-only kids trial class. We won't be offering this free session often (if ever again), and seats are strictly limited!** 
+
+We'll be playing with the colorful, kid-friendly **Mini Mahjer** sets to teach the basics in a fun, active, non-screen social setting. 🧩✨
+
+📅 Wednesday, July 15
+⏰ 1:00 PM - 2:00 PM
+📍 kiddywampus (West End, St. Louis Park)
+👶 Ages 7+ (Designed specifically for kids!)
+
+🎟️ Spot reservation is free, but you must register in advance. 
+
+🔗 **Register now to lock in your spot:** **majmob.com/kids.html** (link in bio)!
+
+#MahJonggTwinCities #TwinCitiesParents #KidsActivitiesMN #kiddywampusWestEnd #MiniMahj #NonScreenTime #LimitedAvailability #MahjMob</div>
+      </div>
+    </div>
+
+    <div class="action-panel">
+      <button class="btn-copy" onclick="copyCaption()">Copy Caption Text</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Caption copied to clipboard!</div>
+
+  <script>
+    function copyCaption() {
+      const captionText = `🀄 **FREE Kids Mini Mahj Intro Class! (SPOTS FILLING FAST)** 🀄
+
+Curious about Mah Jongg for kids? We are hosting a **FREE, 1-hour trial class designed specifically for kids and taught by Maj Mob**! Let your children experience the fun of Mah Jongg in a simplified, super-colorful way designed just for them. Give your kids a break from screens!
+
+🚨 **This is a rare, one-time-only kids trial class. We won't be offering this free session often (if ever again), and seats are strictly limited!** 
+
+We'll be playing with the colorful, kid-friendly Mini Mahjer sets to teach the basics in a fun, active, non-screen social setting. 🧩✨
+
+📅 Wednesday, July 15
+⏰ 1:00 PM - 2:00 PM
+📍 kiddywampus (West End, St. Louis Park)
+👶 Ages 7+ (Designed specifically for kids!)
+
+🎟️ Spot reservation is free, but you must register in advance. 
+
+🔗 **Register now to lock in your spot:** majmob.com/kids.html (link in bio)!
+
+#MahJonggTwinCities #TwinCitiesParents #KidsActivitiesMN #kiddywampusWestEnd #MiniMahj #NonScreenTime #LimitedAvailability #MahjMob`;
+
+      function fallbackCopyText(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          const successful = document.execCommand('copy');
+          if (successful) {
+            showToast();
+          } else {
+            console.error('Fallback copy command failed');
+            alert('Failed to copy. Please manually highlight and copy the caption below.');
+          }
+        } catch (err) {
+          console.error('Fallback copy failed', err);
+          alert('Failed to copy. Please manually highlight and copy the caption below.');
+        }
+
+        document.body.removeChild(textArea);
+      }
+
+      function showToast() {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2000);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(captionText)
+          .then(showToast)
+          .catch(() => fallbackCopyText(captionText));
+      } else {
+        fallbackCopyText(captionText);
+      }
+    }
+  </script>
+</body>
+</html>
