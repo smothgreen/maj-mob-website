@@ -10,6 +10,21 @@
 
     gtag('config', 'G-9GJQDJCNE6');
   </script>
+  <!-- Unregister Canva Service Worker to prevent showing cached old site -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister().then(function(success) {
+            if (success) {
+              console.log('Unregistered old Canva service worker.');
+              window.location.reload();
+            }
+          });
+        }
+      });
+    }
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maj Mob | Mah Jongg Classes & Open Play in the Twin Cities</title>
@@ -51,8 +66,8 @@
           <li><a href="#about" class="nav-link">About Us</a></li>
           <li><a href="#classes" class="nav-link">Classes</a></li>
           <li><a href="kids.html" class="nav-link">Mini Mahj</a></li>
+          <li><a href="private.html" class="nav-link">Private Classes</a></li>
           <li><a href="#schedule" class="nav-link">Mob Around Town</a></li>
-          <li><a href="#host" class="nav-link">Host the Mob</a></li>
           <li><a href="#links" class="nav-link">Resources</a></li>
           <li><a href="#contact" class="btn btn-secondary" style="color: white; padding: 0.5rem 1.5rem; min-height: auto;">Contact</a></li>
         </ul>
@@ -420,7 +435,11 @@
               <li>You provide the players, the space, and a few small tables (card tables work great!).</li>
               <li>Classes are <strong>$50 per person</strong>.</li>
             </ul>
-            <a href="mailto:majmobmn@gmail.com" class="btn btn-primary">Book a Class: majmobmn@gmail.com</a>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem;">
+              <a href="https://square.link/u/wxYhmkjE" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.8rem 1.5rem; min-height: auto;">Register Private 101</a>
+              <a href="https://square.link/u/rVce5Fes" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.8rem 1.5rem; min-height: auto;">Register Private 102</a>
+              <a href="private.html" class="btn btn-outline" style="border-color: var(--primary); color: var(--primary); padding: 0.8rem 1.5rem; min-height: auto;">View Class Details</a>
+            </div>
           </div>
           <!-- Image from host resources -->
           <img src="_assets/media/693152f6cf9c0789caee4b80214b7af2.jpg" alt="American Mah Jongg tiles laid out on a table with NMJL cards" class="host-img">
@@ -564,8 +583,8 @@
             <li><a href="#about">About Us</a></li>
             <li><a href="#classes">Classes</a></li>
             <li><a href="kids.html">Mini Mahj</a></li>
+            <li><a href="private.html">Private Classes</a></li>
             <li><a href="#schedule">Upcoming Schedule</a></li>
-            <li><a href="#host">Host a Class</a></li>
             <li><a href="#links">Resources</a></li>
           </ul>
         </div>

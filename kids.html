@@ -10,6 +10,21 @@
 
     gtag('config', 'G-9GJQDJCNE6');
   </script>
+  <!-- Unregister Canva Service Worker to prevent showing cached old site -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister().then(function(success) {
+            if (success) {
+              console.log('Unregistered old Canva service worker.');
+              window.location.reload();
+            }
+          });
+        }
+      });
+    }
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mini Mahj for Kids | Maj Mob Mah Jongg Twin Cities</title>
@@ -50,9 +65,9 @@
         <ul class="nav-menu" id="nav-menu">
           <li><a href="index.html#about" class="nav-link">About Us</a></li>
           <li><a href="index.html#classes" class="nav-link">Classes</a></li>
-          <li><a href="kids.html" class="nav-link active-page">Mini Mahj</a></li>
+          <li><a href="kids.html" class="nav-link">Mini Mahj</a></li>
+          <li><a href="private.html" class="nav-link">Private Classes</a></li>
           <li><a href="index.html#schedule" class="nav-link">Mob Around Town</a></li>
-          <li><a href="index.html#host" class="nav-link">Host the Mob</a></li>
           <li><a href="index.html#links" class="nav-link">Resources</a></li>
           <li><a href="index.html#contact" class="btn btn-secondary" style="color: white; padding: 0.5rem 1.5rem; min-height: auto;">Contact</a></li>
         </ul>
@@ -390,8 +405,8 @@
             <li><a href="index.html#about">About Us</a></li>
             <li><a href="index.html#classes">Classes</a></li>
             <li><a href="kids.html">Mini Mahj</a></li>
+            <li><a href="private.html">Private Classes</a></li>
             <li><a href="index.html#schedule">Upcoming Schedule</a></li>
-            <li><a href="index.html#host">Host a Class</a></li>
             <li><a href="index.html#links">Resources</a></li>
           </ul>
         </div>

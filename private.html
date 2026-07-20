@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9GJQDJCNE6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9GJQDJCNE6');
+  </script>
+  <!-- Unregister Canva Service Worker to prevent showing cached old site -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister().then(function(success) {
+            if (success) {
+              console.log('Unregistered old Canva service worker.');
+              window.location.reload();
+            }
+          });
+        }
+      });
+    }
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Mah Jongg Classes | Maj Mob Twin Cities</title>
+  
+  <meta name="description" content="Register for private American Mah Jongg classes in Minneapolis & St. Paul. We teach Private Maj 101 and 102. Gather your friends, register here, and we bring the lessons to you!">
+  <meta name="keywords" content="Mah Jongg, Mahjong classes, private Mahjong lessons, Twin Cities, Minneapolis, St. Paul, learn Mahjong, Janie, Caren">
+  
+  <!-- OG Meta Tags -->
+  <meta property="og:title" content="Private Mah Jongg Classes | Maj Mob Twin Cities">
+  <meta property="og:description" content="Learn Mah Jongg with your friends in your own space! Register for private lessons, choose Maj 101 or 102, and we'll bring the Mob to you.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="_assets/media/693152f6cf9c0789caee4b80214b7af2.jpg">
+  
+  <!-- Icons -->
+  <link rel="shortcut icon" href="_assets/images/logo.jpg?v=3">
+  <link rel="icon" href="_assets/images/logo.jpg?v=3" sizes="192x192">
+  <link rel="apple-touch-icon" href="_assets/images/logo.jpg?v=3" sizes="180x180">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header id="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo-link" id="nav-logo" aria-label="Maj Mob Home">
+        <img src="_assets/images/logo.jpg" alt="Maj Mob Logo" id="logo-img">
+        <span>Maj Mob</span>
+      </a>
+      
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html#about" class="nav-link">About Us</a></li>
+          <li><a href="index.html#classes" class="nav-link">Classes</a></li>
+          <li><a href="kids.html" class="nav-link">Mini Mahj</a></li>
+          <li><a href="private.html" class="nav-link active-page">Private Classes</a></li>
+          <li><a href="index.html#schedule" class="nav-link">Mob Around Town</a></li>
+          <li><a href="index.html#links" class="nav-link">Resources</a></li>
+          <li><a href="index.html#contact" class="btn btn-secondary" style="color: white; padding: 0.5rem 1.5rem; min-height: auto;">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <span class="class-tag" style="background-color: var(--primary-alpha); color: var(--primary); margin-bottom: 1rem; display: inline-block;">Host the Mob</span>
+          <h1>Learn with Friends. <br>In Your Own Space. <br><span class="accent">Private Classes.</span></h1>
+          <p class="lead" style="margin-top: 1rem;">
+            Gather your friends and family, and we will bring the Mah Jongg to you!
+          </p>
+          <p>
+            Whether it's a cozy home gathering, a neighborhood clubhouse event, or a private club night, we make learning American Mah Jongg fun, social, and easy. Check out our classes and register below.
+          </p>
+          <div class="hero-actions">
+            <a href="#registration" class="btn btn-primary" id="cta-register">View Registration Links</a>
+            <a href="index.html#contact" class="btn btn-outline" id="cta-contact">Questions? Contact Us</a>
+          </div>
+        </div>
+        
+        <div class="hero-logo-card reveal reveal-delay-1" style="padding: 1rem;">
+          <div style="border-radius: var(--border-radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: 350px;">
+            <img src="_assets/media/693152f6cf9c0789caee4b80214b7af2.jpg" alt="American Mah Jongg tiles laid out on a table with NMJL cards" style="width: 100%; height: 100%; object-fit: cover; object-position: center; animation: none;">
+          </div>
+          <p style="font-style: italic; margin-top: 1rem; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem; font-weight:600;">Customized group lessons taught at your convenience</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="how-it-works" class="section alt-bg">
+      <div class="container">
+        <div class="text-center reveal">
+          <h2>How Private Classes Work</h2>
+          <p class="classes-intro" style="margin-bottom: 3.5rem;">
+            Getting started with your private Mah Jongg class is simple. Just follow these steps:
+          </p>
+        </div>
+        
+        <div class="benefits-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <!-- Step 1 -->
+          <div class="benefit-card reveal">
+            <div class="benefit-number">1</div>
+            <h3>Gather a Group</h3>
+            <p>Gather your friends, family, or neighbors. We recommend a minimum of 4 players (1 full table) and can accommodate multiple tables for larger groups!</p>
+          </div>
+          
+          <!-- Step 2 -->
+          <div class="benefit-card reveal reveal-delay-1">
+            <div class="benefit-number">2</div>
+            <h3>Register & Pay</h3>
+            <p>Have each player register using the Square payment links below for either Maj 101 (Beginners) or Maj 102 (Advanced Beginners).</p>
+          </div>
+          
+          <!-- Step 3 -->
+          <div class="benefit-card reveal reveal-delay-2">
+            <div class="benefit-number">3</div>
+            <h3>Coordinate Your Date</h3>
+            <p>Once registered, email us at <a href="mailto:majmobmn@gmail.com" style="font-weight:600; text-decoration:underline;">majmobmn@gmail.com</a> to coordinate your preferred date, time, and location!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="section">
+      <div class="container">
+        <div class="text-center reveal">
+          <h2>Private Class Registration</h2>
+          <p class="classes-intro">
+            Select your class level below to register and complete payment. Private classes are priced at <strong>$50 per person</strong>.
+          </p>
+        </div>
+        
+        <div class="classes-grid">
+          <!-- Class 101 Card -->
+          <div class="class-card reveal">
+            <div class="class-header">
+              <span class="class-tag" style="background-color: var(--primary-alpha); color: var(--primary);">Beginner Level 1</span>
+              <span class="class-price">$50 <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-muted);">/ person</span></span>
+            </div>
+            <h3>Private Maj 101</h3>
+            <p>
+              <strong>Brand new to the game? Start here!</strong>
+              <br><br>
+              In Private Maj 101, we teach you the game in a friendly, low-stress environment. You'll learn the suits, basic rules, and the general layout of the card. By the end of this class, you'll be playing a modified, comfortable version of Mah Jongg.
+              <br><br>
+              <em>We bring the tiles, NMJL cards, mats, and all learning materials right to your table. No prior experience is needed!</em>
+            </p>
+            <a href="https://square.link/u/wxYhmkjE" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%; margin-top: 1.5rem;">Register for Private 101</a>
+          </div>
+
+          <!-- Class 102 Card -->
+          <div class="class-card level-2 reveal reveal-delay-1">
+            <div class="class-header">
+              <span class="class-tag" style="background-color: var(--secondary-alpha); color: var(--secondary);">Advanced Beginner Level 2</span>
+              <span class="class-price">$50 <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-muted);">/ person</span></span>
+            </div>
+            <h3>Private Maj 102</h3>
+            <p>
+              <strong>Ready to learn full gameplay?</strong>
+              <br><br>
+              Private Maj 102 builds directly on the basics. We reinforce what was covered in 101, and then introduce the deal, the Charleston, and teach you how to start choosing hands on the National Mah Jongg League card.
+              <br><br>
+              <em>By the end of this session, you and your group will have the confidence and skills to play a full, standard game of Mahj together.</em>
+            </p>
+            <a href="https://square.link/u/rVce5Fes" target="_blank" rel="noopener" class="btn btn-secondary" style="width:100%; margin-top: 1.5rem;">Register for Private 102</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planning & Details Section -->
+    <section id="details" class="section alt-bg">
+      <div class="container">
+        <div class="together-panel reveal reveal-scale" style="max-width: 850px; margin: 0 auto;">
+          <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center;">Private Class Guidelines</h3>
+          <div style="text-align: left; line-height: 1.7; margin-bottom: 2rem;">
+            <p style="margin-bottom: 1rem;">
+              To make your private class experience as smooth as possible, here is what we ask of our hosts:
+            </p>
+            <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+              <li><strong>Group Size:</strong> A minimum of 4 players (1 table) is required. If you have fewer players, please reach out to see if we can accommodate, or check out our public schedules under <em>Mob Around Town</em>.</li>
+              <li><strong>The Space:</strong> You will need to provide a quiet space and a standard card table (or square dining table) and 4 chairs per table. Standard card tables work perfectly!</li>
+              <li><strong>Service Area:</strong> We travel to homes, clubhouses, and venues throughout the Twin Cities Metro area. If you live outside the metro, please contact us first.</li>
+              <li><strong>Scheduling:</strong> We recommend emailing us at <a href="mailto:majmobmn@gmail.com">majmobmn@gmail.com</a> to verify that your preferred date and time is available before registering, though you can also register first and coordinate dates right after!</li>
+            </ul>
+          </div>
+          <div style="text-align: center;">
+            <a href="mailto:majmobmn@gmail.com?subject=Private%20Class%20Scheduling" class="btn btn-secondary" style="padding: 1rem 3rem;">Email us: majmobmn@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <h3>Maj Mob</h3>
+          <p>
+            Bringing friendly, accessible American Mah Jongg lessons and supported open play to the Twin Cities.
+          </p>
+          <p style="margin-top:1rem; font-size: 0.8rem; font-weight:600;">
+            Learn Maj. Play Together.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#classes">Classes</a></li>
+            <li><a href="kids.html">Mini Mahj</a></li>
+            <li><a href="private.html">Private Classes</a></li>
+            <li><a href="index.html#schedule">Upcoming Schedule</a></li>
+            <li><a href="index.html#links">Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contact & Subscription</h4>
+          <p>Email: <a href="mailto:mobmajmn@gmail.com">mobmajmn@gmail.com</a></p>
+          <p>Alternative: <a href="mailto:majmobmn@gmail.com">majmobmn@gmail.com</a></p>
+          <p style="margin-top: 1rem;"><a href="https://squareup.com/outreach/drpwpo/subscribe" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem; min-height:auto; color: white;">Join Update List</a></p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Maj Mob. All rights reserved. Created in partnership with Antigravity AI.</p>
+        <p>
+          <a href="https://nationalmahjonggleague.org" target="_blank" rel="noopener" style="color: rgba(250, 247, 242, 0.5);">National Mah Jongg League</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Behavior -->
+  <script src="app.js"></script>
+</body>
+</html>
