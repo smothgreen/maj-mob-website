@@ -63,41 +63,85 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================================
-  // Dynamic Events Schedule Filter
+  // Dynamic Events Schedule & Automatic Past Date Filter
   // ==========================================================================
   const filterButtons = document.querySelectorAll('.filter-btn');
   const eventCards = document.querySelectorAll('.event-card');
+  const noEventsMsg = document.getElementById('no-events-msg');
 
+  // Helper to parse ISO date string (YYYY-MM-DD) into local end-of-day Date object
+  const parseDate = (dateStr) => {
+    if (!dateStr) return null;
+    const parts = dateStr.split('-');
+    if (parts.length !== 3) return null;
+    return new Date(parts[0], parts[1] - 1, parts[2], 23, 59, 59);
+  };
+
+  const now = new Date(); // Current local time
+
+  // 1. Hide individual past class rows and past registration buttons
+  document.querySelectorAll('[data-date]').forEach(el => {
+    const classDate = parseDate(el.getAttribute('data-date'));
+    if (classDate && classDate < now) {
+      el.style.display = 'none';
+      el.classList.add('is-past-item');
+    }
+  });
+
+  // 2. Hide entire event cards if all their classes have passed or end date is past
+  const updateScheduleDisplay = (filterValue = 'all') => {
+    let visibleCount = 0;
+
+    eventCards.forEach(card => {
+      const endDate = parseDate(card.getAttribute('data-end-date'));
+      const cardLocation = card.getAttribute('data-location');
+      
+      // Check if all class rows in this card are past
+      const dateRows = card.querySelectorAll('.event-row[data-date]');
+      const allRowsPast = dateRows.length > 0 && Array.from(dateRows).every(row => {
+        const d = parseDate(row.getAttribute('data-date'));
+        return d && d < now;
+      });
+
+      const isPast = (endDate && endDate < now) || allRowsPast;
+
+      card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+
+      if (isPast) {
+        card.style.display = 'none';
+        card.classList.add('is-past-card');
+      } else if (filterValue === 'all' || cardLocation === filterValue) {
+        visibleCount++;
+        card.style.display = 'flex';
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) scale(1)';
+        }, 50);
+      } else {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px) scale(0.98)';
+        setTimeout(() => {
+          card.style.display = 'none';
+        }, 300);
+      }
+    });
+
+    // Toggle "No upcoming events" fallback message
+    if (noEventsMsg) {
+      noEventsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  };
+
+  // Initial calculation on page load
+  updateScheduleDisplay('all');
+
+  // Handle location filter button clicks
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Update active button state
       filterButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
       const filterValue = btn.getAttribute('data-filter');
-
-      eventCards.forEach(card => {
-        const cardLocation = card.getAttribute('data-location');
-        
-        // Setup simple fade transitions
-        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-        
-        if (filterValue === 'all' || cardLocation === filterValue) {
-          // Show card
-          card.style.display = 'flex';
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0) scale(1)';
-          }, 50);
-        } else {
-          // Hide card
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(10px) scale(0.98)';
-          setTimeout(() => {
-            card.style.display = 'none';
-          }, 300);
-        }
-      });
+      updateScheduleDisplay(filterValue);
     });
   });
 

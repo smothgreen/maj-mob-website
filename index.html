@@ -285,10 +285,10 @@
         </div>
 
         <!-- Dynamic Events Grid -->
-        <div class="schedule-grid reveal">
+        <div class="schedule-grid reveal" id="schedule-grid">
           
           <!-- Sisters Sludge Minneapolis -->
-          <div class="event-card" data-location="minneapolis">
+          <div class="event-card" data-location="minneapolis" data-end-date="2026-07-20">
             <div>
               <span class="event-date">Monday, July 13 & 20</span>
               <h3 class="event-venue">Sisters’ Sludge Cafe & Wine Bar</h3>
@@ -298,11 +298,11 @@
               </p>
               
               <div class="event-classes-list">
-                <div class="event-row">
+                <div class="event-row" data-date="2026-07-13">
                   <span class="event-name">Maj 101 (July 13)</span>
                   <span class="event-time">2:00 PM - 4:00 PM</span>
                 </div>
-                <div class="event-row">
+                <div class="event-row" data-date="2026-07-20">
                   <span class="event-name">Maj 102 (July 20)</span>
                   <span class="event-time">2:00 PM - 4:00 PM</span>
                 </div>
@@ -311,15 +311,15 @@
             
             <div>
               <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                <a href="https://square.link/u/Z00tjMoE" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 101</a>
-                <a href="https://square.link/u/zV3r0O79" target="_blank" rel="noopener" class="btn btn-secondary" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 102</a>
+                <a href="https://square.link/u/Z00tjMoE" target="_blank" rel="noopener" class="btn btn-primary" data-date="2026-07-13" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 101</a>
+                <a href="https://square.link/u/zV3r0O79" target="_blank" rel="noopener" class="btn btn-secondary" data-date="2026-07-20" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 102</a>
               </div>
               <p class="event-note">Opt-in to emails at checkout for class notifications.</p>
             </div>
           </div>
 
           <!-- Red Cow St. Paul -->
-          <div class="event-card" data-location="stpaul">
+          <div class="event-card" data-location="stpaul" data-end-date="2026-07-28">
             <div>
               <span class="event-date">Wednesday, July 22 & Tuesday, July 28</span>
               <h3 class="event-venue">Red Cow - St. Paul</h3>
@@ -330,11 +330,11 @@
               <p style="font-size: 0.9rem; font-weight: bold; color: var(--primary); margin-bottom: 0.8rem;">* Happy Hour drink & appetizer included!</p>
               
               <div class="event-classes-list">
-                <div class="event-row">
+                <div class="event-row" data-date="2026-07-22">
                   <span class="event-name">Maj 101 (July 22)</span>
                   <span class="event-time">2:00 PM - 4:00 PM</span>
                 </div>
-                <div class="event-row">
+                <div class="event-row" data-date="2026-07-28">
                   <span class="event-name">Maj 102 (July 28)</span>
                   <span class="event-time">2:00 PM - 4:00 PM</span>
                 </div>
@@ -343,14 +343,14 @@
             
             <div>
               <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                <a href="https://square.link/u/rJy8Zo1T" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 101</a>
-                <a href="https://square.link/u/3UK3kdYs" target="_blank" rel="noopener" class="btn btn-secondary" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 102</a>
+                <a href="https://square.link/u/rJy8Zo1T" target="_blank" rel="noopener" class="btn btn-primary" data-date="2026-07-22" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 101</a>
+                <a href="https://square.link/u/3UK3kdYs" target="_blank" rel="noopener" class="btn btn-secondary" data-date="2026-07-28" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 102</a>
               </div>
             </div>
           </div>
 
           <!-- Jenny in the City St. Paul -->
-          <div class="event-card" data-location="stpaul">
+          <div class="event-card" data-location="stpaul" data-end-date="2026-08-13">
             <div>
               <span class="event-date">Saturday, Aug 8 & Thursday, Aug 13</span>
               <h3 class="event-venue">Jenny in the City - St. Paul</h3>
@@ -361,11 +361,11 @@
               <p style="font-size: 0.9rem; font-weight: bold; color: var(--primary); margin-bottom: 0.8rem;">* Class participants receive 20% store discount on class day!</p>
               
               <div class="event-classes-list">
-                <div class="event-row">
+                <div class="event-row" data-date="2026-08-08">
                   <span class="event-name">Maj 101 (Aug 8)</span>
                   <span class="event-time">11:00 AM - 1:00 PM</span>
                 </div>
-                <div class="event-row">
+                <div class="event-row" data-date="2026-08-13">
                   <span class="event-name">Maj 102 (Aug 13)</span>
                   <span class="event-time">5:00 PM - 7:00 PM</span>
                 </div>
@@ -374,14 +374,14 @@
             
             <div>
               <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                <a href="https://square.link/u/nAo15ovA" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 101</a>
-                <a href="https://square.link/u/g11qEyNz" target="_blank" rel="noopener" class="btn btn-secondary" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 102</a>
+                <a href="https://square.link/u/nAo15ovA" target="_blank" rel="noopener" class="btn btn-primary" data-date="2026-08-08" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 101</a>
+                <a href="https://square.link/u/g11qEyNz" target="_blank" rel="noopener" class="btn btn-secondary" data-date="2026-08-13" style="flex:1; padding: 0.6rem; font-size:0.95rem; min-height:44px;">Register 102</a>
               </div>
             </div>
           </div>
 
           <!-- Pool and Yacht Club -->
-          <div class="event-card" data-location="private-club">
+          <div class="event-card" data-location="private-club" data-end-date="2026-08-06">
             <div>
               <span class="event-date">July 23, 30 & August 6</span>
               <h3 class="event-venue">Pool and Yacht Club</h3>
@@ -391,7 +391,7 @@
               </p>
               
               <div class="event-classes-list" style="margin-top: 1rem;">
-                <div style="margin-bottom: 0.8rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.5rem;">
+                <div data-date="2026-07-23" style="margin-bottom: 0.8rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.5rem;">
                   <strong style="color: var(--primary); display: block; font-size: 0.95rem; margin-bottom: 0.2rem;">Thursday, July 23</strong>
                   <div class="event-row" style="margin-bottom: 0.2rem;">
                     <span class="event-name">Class 101 Lessons ($50)</span>
@@ -402,7 +402,7 @@
                     <span class="event-time">1:00 PM - 3:00 PM</span>
                   </div>
                 </div>
-                <div style="margin-bottom: 0.8rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.5rem;">
+                <div data-date="2026-07-30" style="margin-bottom: 0.8rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.5rem;">
                   <strong style="color: var(--primary); display: block; font-size: 0.95rem; margin-bottom: 0.2rem;">Thursday, July 30</strong>
                   <div class="event-row" style="margin-bottom: 0.2rem;">
                     <span class="event-name">Class 102 Lessons ($50)</span>
@@ -413,7 +413,7 @@
                     <span class="event-time">1:00 PM - 3:00 PM</span>
                   </div>
                 </div>
-                <div>
+                <div data-date="2026-08-06">
                   <strong style="color: var(--primary); display: block; font-size: 0.95rem; margin-bottom: 0.2rem;">Thursday, August 6 ($50/Lessons)</strong>
                   <div class="event-row" style="margin-bottom: 0.2rem;">
                     <span class="event-name">Class 101 Lessons</span>
@@ -431,6 +431,12 @@
               <button class="btn btn-outline" disabled style="width:100%; border-color:#999; color:#666; cursor:not-allowed;">Call Club to Register</button>
               <p class="event-note" style="margin-top:0.5rem;">Private event. For members and their guests. Call the club to register.</p>
             </div>
+          </div>
+
+          <!-- Fallback Message if no upcoming events match -->
+          <div id="no-events-msg" style="display:none; grid-column: 1/-1; text-align:center; padding: 2.5rem; background: var(--bg-white); border-radius: var(--border-radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">No Upcoming Public Classes Scheduled Right Now</h3>
+            <p style="color: var(--text-muted); font-size: 1.05rem;">Join the Mob List below to be the first to know when new dates and locations are added!</p>
           </div>
 
         </div>
