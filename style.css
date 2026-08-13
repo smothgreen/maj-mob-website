@@ -196,6 +196,17 @@ a {
   box-shadow: var(--shadow-md);
 }
 
+.btn-combo {
+  background-color: var(--accent-tile);
+  color: var(--bg-warm);
+}
+
+.btn-combo:hover {
+  background-color: #e56b00;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 .btn-outline {
   background-color: transparent;
   border-color: var(--primary);
@@ -529,16 +540,16 @@ header.scrolled .logo-link img {
 
 .classes-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  max-width: 1000px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .class-card {
   background-color: var(--bg-white);
   border-radius: var(--border-radius-lg);
-  padding: 2.5rem;
+  padding: 2rem;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border-color);
   position: relative;
@@ -567,6 +578,10 @@ header.scrolled .logo-link img {
   background-color: var(--secondary);
 }
 
+.class-card.level-combo::after {
+  background-color: var(--accent-tile);
+}
+
 .class-header {
   display: flex;
   justify-content: space-between;
@@ -577,11 +592,17 @@ header.scrolled .logo-link img {
 .class-tag {
   background-color: var(--primary-alpha);
   color: var(--primary);
-  padding: 0.3rem 1rem;
-  border-radius: 50px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
   font-weight: 700;
   font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .class-card.level-2 .class-tag {
@@ -589,11 +610,17 @@ header.scrolled .logo-link img {
   color: var(--secondary);
 }
 
+.class-card.level-combo .class-tag {
+  background-color: rgba(253, 120, 6, 0.1);
+  color: var(--accent-tile);
+}
+
 .class-price {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-dark);
+  white-space: nowrap;
 }
 
 .class-card h3 {
@@ -604,6 +631,10 @@ header.scrolled .logo-link img {
 
 .class-card.level-2 h3 {
   color: var(--secondary);
+}
+
+.class-card.level-combo h3 {
+  color: var(--accent-tile);
 }
 
 .class-card p {
@@ -1160,6 +1191,12 @@ footer {
 @media (max-width: 1024px) {
   h1 { font-size: 2.4rem; }
   h2 { font-size: 2rem; }
+
+  .classes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+    gap: 2rem;
+  }
   
   .hero-grid {
     grid-template-columns: 1.1fr 0.9fr;
