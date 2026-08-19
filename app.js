@@ -166,6 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => {
       revealObserver.observe(el);
+      // Immediately activate elements if already in initial viewport bounds
+      if (el.getBoundingClientRect().top < window.innerHeight + 500) {
+        el.classList.add('active');
+      }
     });
   } else {
     // Fallback if IntersectionObserver is not supported
