@@ -1,0 +1,363 @@
+/* ==========================================================================
+   Maj Mob Study Page & Worksheet Builder - Stylesheet
+   ========================================================================== */
+
+/* Screen-only Container */
+.study-body {
+  background-color: var(--bg-warm);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.study-main {
+  flex: 1;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Control Panel Section */
+.control-panel-section {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.control-card {
+  background: var(--bg-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+}
+
+.control-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.lead-text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.control-group label {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.control-group select, .input-item input {
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-warm);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.control-group select:focus, .input-item input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-alpha);
+}
+
+.headline-custom-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.input-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.input-item label {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.input-item input {
+  background-color: var(--bg-white);
+}
+
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+/* Tile Picker Builder */
+.tile-picker-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  background-color: var(--bg-warm);
+  border: 1px dashed var(--border-color);
+  padding: 1rem;
+  border-radius: var(--border-radius-sm);
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.picker-tile-btn {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+  width: 44px;
+  height: 58px;
+}
+
+.picker-tile-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.picker-tile-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Letter Paper Preview Section */
+.paper-section {
+  padding: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Standard US Letter size container on screen */
+.letter-page {
+  background-color: #ffffff;
+  width: 8.5in;
+  height: 11in;
+  padding: 0.6in 0.5in 0.5in 0.5in; /* 0.6in top, 0.5in side/bottom margins */
+  box-shadow: var(--shadow-lg);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+
+/* Header inside Worksheet */
+.worksheet-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.worksheet-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #000000;
+  letter-spacing: -0.01em;
+}
+
+.worksheet-header h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 0;
+  color: #000000;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Tile Grid Layout */
+.tile-rows-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* Distribute rows evenly */
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tile-row-wrapper {
+  background-color: #fafbfc;
+  border: 1px solid #f0f0f4;
+  border-radius: var(--border-radius-sm);
+  padding: 0.8rem 0.5rem;
+}
+
+.tile-row-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem; /* space between tiles */
+  flex-wrap: nowrap;
+}
+
+/* Tile Item Design */
+.tile-card {
+  width: 0.52in; /* Proportional widths */
+  height: 0.69in; /* 3:4 aspect ratio */
+  background-color: #ffffff;
+  border: 1px solid #000000; /* Crisp dark border */
+  border-radius: 3px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  transition: var(--transition-fast);
+  cursor: pointer;
+}
+
+.tile-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Slot Index Indicators (Screen Only) */
+.tile-card::before {
+  content: attr(data-slot);
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  display: none;
+}
+
+.show-slots .tile-card::before {
+  display: block;
+}
+
+/* Footer Section inside Worksheet */
+.worksheet-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eaeaea;
+  padding-top: 0.8rem;
+  font-size: 0.82rem;
+  color: #777777;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.footer-page-num {
+  font-weight: 600;
+  color: #555555;
+}
+
+/* ==========================================================================
+   Print Stylesheet
+   ========================================================================== */
+@media print {
+  /* Hide all screen-only UI components */
+  .screen-only, 
+  #header, 
+  .control-panel-section,
+  .hamburger,
+  ::placeholder {
+    display: none !important;
+  }
+  
+  /* Reset page body */
+  body, .study-body, .study-main, .paper-section {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    width: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Target standard page size */
+  @page {
+    size: letter portrait;
+    margin: 0; /* Let HTML margins govern spacing */
+  }
+
+  /* Make the letter container occupy the full page without border/shadows */
+  .letter-page {
+    width: 8.5in !important;
+    height: 11in !important;
+    padding: 0.6in 0.5in 0.5in 0.5in !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    page-break-inside: avoid !important;
+    page-break-after: always !important;
+    box-sizing: border-box !important;
+  }
+
+  /* High contrast colors for printing */
+  .worksheet-header h1, 
+  .worksheet-header h2 {
+    color: #000000 !important;
+  }
+
+  .tile-row-wrapper {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .tile-card {
+    border: 1px solid #000000 !important;
+    /* Avoid scaling blurring */
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+  }
+  
+  .worksheet-footer {
+    border-top: 1px solid #000000 !important;
+    color: #000000 !important;
+  }
+  
+  .footer-page-num {
+    color: #000000 !important;
+  }
+}

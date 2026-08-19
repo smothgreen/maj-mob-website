@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Printable Handouts - Maj Mob X Mini Mahjer</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #5c2d91;
+      --secondary: #ff5a5f;
+      --text-dark: #262626;
+      --text-muted: #555555;
+      --border-color: #e5e5e5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background-color: #f4f4f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 0;
+    }
+
+    /* Print control panel */
+    .control-panel {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      width: 100%;
+      max-width: 8.5in;
+    }
+
+    .btn-print {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(92, 45, 145, 0.25);
+      transition: all 0.2s ease;
+    }
+
+    .btn-print:hover {
+      background-color: #4b2375;
+      transform: translateY(-1px);
+    }
+
+    /* Letter Page Container */
+    .page-container {
+      background-color: #ffffff;
+      width: 8.5in;
+      height: 11in;
+      padding: 0.4in;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      position: relative;
+    }
+
+    /* Grid Guidelines for Cutting (Screen Only) */
+    .page-container::before {
+      content: '';
+      position: absolute;
+      top: 0.4in;
+      bottom: 0.4in;
+      left: 50%;
+      border-left: 1px dotted #ccc;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .page-container::after {
+      content: '';
+      position: absolute;
+      left: 0.4in;
+      right: 0.4in;
+      top: 50%;
+      border-top: 1px dotted #ccc;
+      transform: translateY(-50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Handout Card Layout */
+    .handout-card {
+      padding: 0.35in 0.3in;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      background-color: #ffffff;
+    }
+
+    /* Card background vector tiles (subtle watermark) */
+    .tile-watermark {
+      position: absolute;
+      width: 32px;
+      height: auto;
+      opacity: 0.28;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Layout positions for background tiles - restricted to open margins */
+    .tile-pos-1 { top: 4%; left: 6%; transform: rotate(-15deg); }
+    .tile-pos-2 { top: 4%; right: 6%; transform: rotate(12deg); }
+    .tile-pos-3 { top: 26%; left: 5%; transform: rotate(-8deg); }
+    .tile-pos-4 { top: 26%; right: 5%; transform: rotate(15deg); }
+    .tile-pos-5 { top: 56%; left: 5%; transform: rotate(10deg); }
+    .tile-pos-6 { top: 56%; right: 5%; transform: rotate(-12deg); }
+    .tile-pos-7 { bottom: 6%; left: 14%; transform: rotate(18deg); }
+    .tile-pos-8 { bottom: 6%; right: 14%; transform: rotate(-10deg); }
+
+    /* Tile positioned exactly between the QR codes */
+    .tile-between-qrs {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -40%) rotate(10deg);
+      width: 32px;
+      height: auto;
+      opacity: 0.28;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Card Content (z-index ensure it sits on top of watermarks) */
+    .card-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    /* Header: Logos */
+    .header-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo-img-majmob {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-img-minimahjer {
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-separator {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin: 0 0.1rem;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    /* Text Content */
+    .headline {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      line-height: 1.35;
+      margin-bottom: 0.4rem;
+    }
+
+    .subheadline {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 0.65rem;
+      padding: 0 0.05in;
+    }
+
+    .callout {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--secondary);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.65rem;
+    }
+
+    /* Columns: QR codes and info */
+    .qr-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.3in;
+      margin-bottom: 0.6rem;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 0.6rem;
+      position: relative; /* Enabled for absolute positioning of tile-between-qrs */
+    }
+
+    .qr-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .qr-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .qr-img {
+      width: 92px;
+      height: 92px;
+      border: 1px solid #eaeaea;
+      border-radius: 6px;
+      margin-bottom: 0.4rem;
+      background: white;
+    }
+
+    .qr-subtext {
+      font-size: 0.74rem;
+      color: var(--text-dark);
+      line-height: 1.3;
+      padding: 0 0.05in;
+    }
+
+    .qr-subtext strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Footer: Branding */
+    .card-footer {
+      text-align: center;
+      border-top: 2px solid var(--primary);
+      padding-top: 0.35rem;
+      margin-top: auto;
+    }
+
+    .footer-url {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    /* Print Specific Media Styles */
+    @media print {
+      @page {
+        margin: 0;
+        size: letter portrait;
+      }
+
+      body {
+        background-color: #ffffff;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .control-panel {
+        display: none;
+      }
+
+      .page-container {
+        box-shadow: none;
+        width: 8.5in;
+        height: 11in;
+        padding: 0.4in;
+        margin: 0;
+        page-break-after: avoid;
+        page-break-before: avoid;
+        page-break-inside: avoid;
+      }
+
+      /* Keep thin guidelines visible in print for cutting */
+      .page-container::before {
+        border-left: 1px dotted #bbbbbb;
+      }
+
+      .page-container::after {
+        border-top: 1px dotted #bbbbbb;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="control-panel">
+    <button class="btn-print" onclick="window.print()">Print Handouts (or Save as PDF)</button>
+  </div>
+
+  <div class="page-container">
+    
+    <!-- Render 4 identical handout cards -->
+    <!-- Card 1 -->
+    <div class="handout-card">
+      <!-- Watermark Background Tiles (Sliced from user sets) -->
+      <img src="_assets/images/tiles/bam_1.png" class="tile-watermark tile-pos-1" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/wind_3.png" class="tile-watermark tile-pos-2" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/dot_9.png" class="tile-watermark tile-pos-3" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/crak_5.png" class="tile-watermark tile-pos-4" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/flower_2.png" class="tile-watermark tile-pos-5" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/crak_7.png" class="tile-watermark tile-pos-6" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/flower_4.png" class="tile-watermark tile-pos-7" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/dot_4.png" class="tile-watermark tile-pos-8" alt="Mini Mahj Tile">
+
+      <div class="card-content">
+        <!-- Logos Header -->
+        <div class="header-logos">
+          <img src="_assets/images/logo.png" class="logo-img-majmob" alt="Maj Mob Logo">
+          <span class="logo-separator">+</span>
+          <img src="_assets/images/mini-mahjer-logo.png" class="logo-img-minimahjer" alt="Mini Mahjer Logo">
+        </div>
+
+        <!-- Headline & Subheadline -->
+        <div>
+          <h2 class="headline">Today you learned Mini Mahjer, a kid-friendly version of American Mahjong.</h2>
+          <p class="subheadline">It builds strategy, focus, and pattern skills (all while having a lot of fun!).</p>
+          <div class="callout">Want to keep playing at home?</div>
+        </div>
+
+        <!-- QR Codes columns -->
+        <div class="qr-section">
+          <!-- Tile centered between the QR codes -->
+          <img src="_assets/images/tiles/flower_5.png" class="tile-between-qrs" alt="Mini Mahj Tile">
+          
+          <div class="qr-column">
+            <div class="qr-title">Buy a set</div>
+            <img src="_assets/media/qr-code-minimahjer.png" class="qr-img" alt="Scan to Shop Mini Mahjer">
+            <p class="qr-subtext">Get 10% off with code <strong>MAJMOB10</strong> at checkout</p>
+          </div>
+          <div class="qr-column">
+            <div class="qr-title">Keep learning</div>
+            <img src="_assets/media/qr-code-majmob.png" class="qr-img" alt="Scan to Visit Maj Mob">
+            <p class="qr-subtext">Book lessons or view classes at <strong>majmob.com</strong></p>
+          </div>
+        </div>
+
+        <!-- Footer url -->
+        <div class="card-footer">
+          <a href="https://majmob.com" class="footer-url">majmob.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="handout-card">
+      <!-- Watermark Background Tiles (Sliced from user sets) -->
+      <img src="_assets/images/tiles/bam_1.png" class="tile-watermark tile-pos-1" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/wind_3.png" class="tile-watermark tile-pos-2" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/dot_9.png" class="tile-watermark tile-pos-3" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/crak_5.png" class="tile-watermark tile-pos-4" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/flower_2.png" class="tile-watermark tile-pos-5" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/crak_7.png" class="tile-watermark tile-pos-6" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/flower_4.png" class="tile-watermark tile-pos-7" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/dot_4.png" class="tile-watermark tile-pos-8" alt="Mini Mahj Tile">
+
+      <div class="card-content">
+        <!-- Logos Header -->
+        <div class="header-logos">
+          <img src="_assets/images/logo.png" class="logo-img-majmob" alt="Maj Mob Logo">
+          <span class="logo-separator">+</span>
+          <img src="_assets/images/mini-mahjer-logo.png" class="logo-img-minimahjer" alt="Mini Mahjer Logo">
+        </div>
+
+        <!-- Headline & Subheadline -->
+        <div>
+          <h2 class="headline">Today you learned Mini Mahjer, a kid-friendly version of American Mahjong.</h2>
+          <p class="subheadline">It builds strategy, focus, and pattern skills (all while having a lot of fun!).</p>
+          <div class="callout">Want to keep playing at home?</div>
+        </div>
+
+        <!-- QR Codes columns -->
+        <div class="qr-section">
+          <!-- Tile centered between the QR codes -->
+          <img src="_assets/images/tiles/flower_5.png" class="tile-between-qrs" alt="Mini Mahj Tile">
+          
+          <div class="qr-column">
+            <div class="qr-title">Buy a set</div>
+            <img src="_assets/media/qr-code-minimahjer.png" class="qr-img" alt="Scan to Shop Mini Mahjer">
+            <p class="qr-subtext">Get 10% off with code <strong>MAJMOB10</strong> at checkout</p>
+          </div>
+          <div class="qr-column">
+            <div class="qr-title">Keep learning</div>
+            <img src="_assets/media/qr-code-majmob.png" class="qr-img" alt="Scan to Visit Maj Mob">
+            <p class="qr-subtext">Book lessons or view classes at <strong>majmob.com</strong></p>
+          </div>
+        </div>
+
+        <!-- Footer url -->
+        <div class="card-footer">
+          <a href="https://majmob.com" class="footer-url">majmob.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="handout-card">
+      <!-- Watermark Background Tiles (Sliced from user sets) -->
+      <img src="_assets/images/tiles/bam_1.png" class="tile-watermark tile-pos-1" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/wind_3.png" class="tile-watermark tile-pos-2" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/dot_9.png" class="tile-watermark tile-pos-3" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/crak_5.png" class="tile-watermark tile-pos-4" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/flower_2.png" class="tile-watermark tile-pos-5" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/crak_7.png" class="tile-watermark tile-pos-6" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/flower_4.png" class="tile-watermark tile-pos-7" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/dot_4.png" class="tile-watermark tile-pos-8" alt="Mini Mahj Tile">
+
+      <div class="card-content">
+        <!-- Logos Header -->
+        <div class="header-logos">
+          <img src="_assets/images/logo.png" class="logo-img-majmob" alt="Maj Mob Logo">
+          <span class="logo-separator">+</span>
+          <img src="_assets/images/mini-mahjer-logo.png" class="logo-img-minimahjer" alt="Mini Mahjer Logo">
+        </div>
+
+        <!-- Headline & Subheadline -->
+        <div>
+          <h2 class="headline">Today you learned Mini Mahjer, a kid-friendly version of American Mahjong.</h2>
+          <p class="subheadline">It builds strategy, focus, and pattern skills (all while having a lot of fun!).</p>
+          <div class="callout">Want to keep playing at home?</div>
+        </div>
+
+        <!-- QR Codes columns -->
+        <div class="qr-section">
+          <!-- Tile centered between the QR codes -->
+          <img src="_assets/images/tiles/flower_5.png" class="tile-between-qrs" alt="Mini Mahj Tile">
+          
+          <div class="qr-column">
+            <div class="qr-title">Buy a set</div>
+            <img src="_assets/media/qr-code-minimahjer.png" class="qr-img" alt="Scan to Shop Mini Mahjer">
+            <p class="qr-subtext">Get 10% off with code <strong>MAJMOB10</strong> at checkout</p>
+          </div>
+          <div class="qr-column">
+            <div class="qr-title">Keep learning</div>
+            <img src="_assets/media/qr-code-majmob.png" class="qr-img" alt="Scan to Visit Maj Mob">
+            <p class="qr-subtext">Book lessons or view classes at <strong>majmob.com</strong></p>
+          </div>
+        </div>
+
+        <!-- Footer url -->
+        <div class="card-footer">
+          <a href="https://majmob.com" class="footer-url">majmob.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="handout-card">
+      <!-- Watermark Background Tiles (Sliced from user sets) -->
+      <img src="_assets/images/tiles/bam_1.png" class="tile-watermark tile-pos-1" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/wind_3.png" class="tile-watermark tile-pos-2" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/dot_9.png" class="tile-watermark tile-pos-3" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/crak_5.png" class="tile-watermark tile-pos-4" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/flower_2.png" class="tile-watermark tile-pos-5" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/crak_7.png" class="tile-watermark tile-pos-6" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/flower_4.png" class="tile-watermark tile-pos-7" alt="Mini Mahj Tile">
+      <img src="_assets/images/tiles/dot_4.png" class="tile-watermark tile-pos-8" alt="Mini Mahj Tile">
+
+      <div class="card-content">
+        <!-- Logos Header -->
+        <div class="header-logos">
+          <img src="_assets/images/logo.png" class="logo-img-majmob" alt="Maj Mob Logo">
+          <span class="logo-separator">+</span>
+          <img src="_assets/images/mini-mahjer-logo.png" class="logo-img-minimahjer" alt="Mini Mahjer Logo">
+        </div>
+
+        <!-- Headline & Subheadline -->
+        <div>
+          <h2 class="headline">Today you learned Mini Mahjer, a kid-friendly version of American Mahjong.</h2>
+          <p class="subheadline">It builds strategy, focus, and pattern skills (all while having a lot of fun!).</p>
+          <div class="callout">Want to keep playing at home?</div>
+        </div>
+
+        <!-- QR Codes columns -->
+        <div class="qr-section">
+          <!-- Tile centered between the QR codes -->
+          <img src="_assets/images/tiles/flower_5.png" class="tile-between-qrs" alt="Mini Mahj Tile">
+          
+          <div class="qr-column">
+            <div class="qr-title">Buy a set</div>
+            <img src="_assets/media/qr-code-minimahjer.png" class="qr-img" alt="Scan to Shop Mini Mahjer">
+            <p class="qr-subtext">Get 10% off with code <strong>MAJMOB10</strong> at checkout</p>
+          </div>
+          <div class="qr-column">
+            <div class="qr-title">Keep learning</div>
+            <img src="_assets/media/qr-code-majmob.png" class="qr-img" alt="Scan to Visit Maj Mob">
+            <p class="qr-subtext">Book lessons or view classes at <strong>majmob.com</strong></p>
+          </div>
+        </div>
+
+        <!-- Footer url -->
+        <div class="card-footer">
+          <a href="https://majmob.com" class="footer-url">majmob.com</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

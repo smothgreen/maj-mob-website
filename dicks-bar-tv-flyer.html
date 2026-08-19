@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dick's Bar Mahj Lessons TV Display | Maj Mob</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-orange: #ff7326;
+      --navy-blue: #192e62;
+      --hot-pink: #e41b6e;
+      --hot-pink-dark: #b80d52;
+      --forest-green: #1e6837;
+      --left-card-bg: #ffffff;
+      --right-card-bg: #ffdbe7;
+      --scan-pill-bg: #ffcce0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #111115;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Toolbar for TV control */
+    .toolbar {
+      width: 100%;
+      max-width: 1280px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e1e24;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    .toolbar h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      color: #ff8c42;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      background: #e41b6e;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: #33333e;
+      color: #ddd;
+    }
+
+    /* 16:9 Aspect Ratio TV Stage */
+    .tv-stage {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      background-color: var(--bg-orange);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3% 4% 2.5% 4%;
+    }
+
+    /* Organic Canva Blobs */
+    .bg-blob-right-top {
+      position: absolute;
+      top: -12%;
+      right: -10%;
+      width: 48%;
+      height: 65%;
+      background: #ffa8c0;
+      border-radius: 40% 50% 60% 40% / 50% 40% 60% 50%;
+      z-index: 1;
+    }
+
+    .bg-blob-right-bottom {
+      position: absolute;
+      bottom: -15%;
+      right: -5%;
+      width: 45%;
+      height: 55%;
+      background: #ffb7d2;
+      border-radius: 60% 40% 50% 50%;
+      z-index: 1;
+    }
+
+    /* Content Layer */
+    .tv-content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Top Header */
+    .header-area {
+      text-align: center;
+      position: relative;
+    }
+
+    .top-badge-speech {
+      position: absolute;
+      left: 0;
+      top: -5px;
+      background: var(--hot-pink);
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 26px 26px 26px 4px;
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: left;
+      box-shadow: 0 8px 20px rgba(228, 27, 110, 0.3);
+      transform: rotate(-3deg);
+    }
+
+    .main-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4.2rem;
+      font-weight: 900;
+      color: var(--navy-blue);
+      letter-spacing: -1px;
+      line-height: 0.95;
+    }
+
+    .venue-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--navy-blue);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-top: 4px;
+    }
+
+    /* Side-by-Side Class Cards (3 Columns) */
+    .cards-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+      margin: 10px 0;
+    }
+
+    .class-card {
+      border-radius: 28px;
+      padding: 20px 20px;
+      text-align: center;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .class-card.card-101 {
+      background: var(--left-card-bg);
+    }
+
+    .class-card.card-102 {
+      background: var(--right-card-bg);
+    }
+
+    .class-card.card-guided {
+      background: #ffffff;
+      border: 3px solid var(--forest-green);
+    }
+
+    .card-date {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--hot-pink);
+      line-height: 1.05;
+      margin-bottom: 2px;
+    }
+
+    .card-time {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--hot-pink);
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--forest-green);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .card-bullets {
+      list-style: none;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy-blue);
+      line-height: 1.45;
+    }
+
+    .card-bullets li {
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .card-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--hot-pink);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    /* Footer Area */
+    .footer-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-box {
+      background: #ffffff;
+      padding: 10px 18px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-box img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Prominent Website Address Box */
+    .website-box {
+      background: #ffffff;
+      border: 3px solid var(--navy-blue);
+      padding: 12px 32px;
+      border-radius: 22px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    .website-label {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--navy-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .website-url {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.7rem;
+      font-weight: 900;
+      color: var(--navy-blue);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    /* QR Code Section */
+    .qr-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .scan-speech-pill {
+      background: var(--scan-pill-bg);
+      color: var(--navy-blue);
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 900;
+      line-height: 1.15;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .navy-arrow-svg {
+      width: 44px;
+      height: 28px;
+      fill: var(--navy-blue);
+      margin-top: 4px;
+    }
+
+    .qr-code-card {
+      background: #ffffff;
+      padding: 8px;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-code-card svg {
+      width: 90px;
+      height: 90px;
+    }
+
+    /* Tilted 3D Mahjong Tiles */
+    .tile-decor {
+      position: absolute;
+      z-index: 5;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.25));
+    }
+
+    .tile-top-left {
+      top: 14%;
+      left: 1.5%;
+      width: 80px;
+      transform: rotate(-15deg);
+    }
+
+    .tile-top-right {
+      top: 4%;
+      right: 2.5%;
+      width: 95px;
+      transform: rotate(15deg);
+    }
+
+    .tile-center-bam {
+      bottom: 2%;
+      left: 45%;
+      width: 85px;
+      transform: rotate(-12deg);
+    }
+
+    .tile-bottom-joker {
+      bottom: 12%;
+      right: 17%;
+      width: 85px;
+      transform: rotate(10deg);
+    }
+
+    @media print {
+      body { background: none; padding: 0; }
+      .toolbar { display: none; }
+      .tv-stage { width: 100vw; height: 100vh; border-radius: 0; box-shadow: none; }
+    }
+
+    :fullscreen .toolbar { display: none; }
+    :fullscreen .tv-stage { width: 100vw; height: 100vh; border-radius: 0; box-shadow: none; }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <h1>🀄 Dick's Bar Mahj Jongg Lessons — Landscape TV Signage (16:9)</h1>
+    <div class="toolbar-actions">
+      <button class="btn btn-secondary" onclick="toggleFullscreen()">Fullscreen TV Mode</button>
+      <button class="btn" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+
+  <div class="tv-stage" id="tvStage">
+    
+    <!-- Background Canvas Blobs -->
+    <div class="bg-blob-right-top"></div>
+    <div class="bg-blob-right-bottom"></div>
+
+    <!-- Mahjong Tiles Decor -->
+    <img src="_assets/images/tiles/dot_4.png" class="tile-decor tile-top-left" alt="4-Dot Tile" onerror="this.style.display='none'">
+    <img src="_assets/images/tiles/dragon_red.png" class="tile-decor tile-top-right" alt="Red Dragon Tile" onerror="this.style.display='none'">
+    <img src="_assets/images/tiles/bam_2.png" class="tile-decor tile-center-bam" alt="2-Bam Tile" onerror="this.style.display='none'">
+    <img src="_assets/images/tiles/joker.png" class="tile-decor tile-bottom-joker" alt="Joker Tile" onerror="this.style.display='none'">
+
+    <div class="tv-content">
+      
+      <!-- Header -->
+      <div class="header-area">
+        <div class="top-badge-speech">
+          Take a lesson.<br>Learn the game.<br>Join the Mob.
+        </div>
+        <div class="main-title">Mahj Jongg Lessons</div>
+        <div class="venue-title">Dick's Bar</div>
+      </div>
+
+      <!-- Class Cards (Side by side landscape readability) -->
+      <div class="cards-container">
+        
+        <!-- Maj 101 -->
+        <div class="class-card card-101">
+          <div class="card-date">Wednesday, Oct 21</div>
+          <div class="card-time">4:00 PM – 6:00 PM</div>
+          <div class="card-title">Maj 101: Learn the Basics</div>
+          <ul class="card-bullets">
+            <li>Intro to tiles, rules & game flow</li>
+            <li>Learn in a fun, relaxed space</li>
+            <li>Play hands & build confidence</li>
+          </ul>
+        </div>
+
+        <!-- Maj 102 -->
+        <div class="class-card card-102">
+          <div class="card-date">Wednesday, Oct 28</div>
+          <div class="card-time">4:00 PM – 6:00 PM</div>
+          <div class="card-title">Maj 102: Next Level</div>
+          <ul class="card-bullets">
+            <li>Build on 101 & play full games</li>
+            <li>Master deal, Charleston & card</li>
+            <li>Learn key game etiquette</li>
+          </ul>
+        </div>
+
+        <!-- Guided Play -->
+        <div class="class-card card-guided">
+          <div class="card-date">Wednesday, Nov 11</div>
+          <div class="card-time">4:00 PM – 6:00 PM</div>
+          <div class="card-title">Guided Play Session</div>
+          <ul class="card-bullets">
+            <li>Practice real game scenarios</li>
+            <li>Instructor assistance on tile strategy</li>
+            <li>Fun social play to solidify skills</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bar -->
+      <div class="footer-area">
+        
+        <!-- MAHJ MOB Logo -->
+        <div class="logo-box">
+          <img src="_assets/images/logo.png" alt="MAHJ MOB Logo" onerror="this.onerror=null; this.src='_assets/images/logo.jpg'">
+        </div>
+
+        <!-- Prominent Website Box for TV viewers -->
+        <div class="website-box">
+          <div class="website-label">Register online at</div>
+          <div class="website-url">majmob.com</div>
+        </div>
+
+        <!-- QR Code & Arrow -->
+        <div class="qr-section">
+          <div style="text-align: right;">
+            <div class="scan-speech-pill">
+              Scan the<br>code to<br>register
+            </div>
+            <div>
+              <svg class="navy-arrow-svg" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="#192e62" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="qr-code-card">
+            <!-- High contrast SVG QR code pointing to https://majmob.com -->
+            <svg viewBox="0 0 33 33" shape-rendering="crispEdges">
+              <path fill="#ffffff" d="M0 0h33v33H0z"/>
+              <path fill="#192e62" d="M0 0h7v7H0zm1 1v5h5V1zm1 1h3v3H2zM9 0h1v2H9zm3 0h1v1h-1zm3 0h1v1h-1zm2 0h1v3h-1zm4 0h7v7h-7zm1 1v5h5V1zm1 1h3v3h-3zM8 1h1v1H8zm2 0h2v1h-2zm4 0h1v1h-1zm2 1h1v1h-1zm-8 1h1v2H8zm2 0h1v1h-1zm2 0h1v1h-1zm3 0h1v1h-1zm2 0h1v1h-1zm-7 1h2v1H9zm4 0h1v1h-1zm2 0h1v1h-1zm-9 1h1v1H6zm2 0h1v1H8zm5 0h1v1h-1zm3 0h2v1h-2zm-8 1h2v1H8zm3 0h1v1h-1zm3 0h2v1h-2zm-6 1h1v1H8zm3 0h2v1h-2zm3 0h1v1h-1zm-8 1h1v2H7zm2 0h3v1H9zm4 0h3v1h-3zm-6 1h2v1H7zm3 0h2v1h-2zm4 0h2v1h-2zm-7 1h1v2H7zm3 0h1v1h-1zm3 0h2v1h-2zm-9 1h1v1H4zm3 0h1v1H7zm4 0h1v1h-1zm3 0h1v1h-1zm-7 1h1v1H7zm2 0h2v1H9zm4 0h1v1h-1zm-6 1h1v1H7zm2 0h1v1H9zm3 0h2v1h-2zm2 0h1v1h-1zm-7 1h2v1H7zm4 0h1v1h-1zm-7 1h7v7H0zm1 1v5h5V26zm1 1h3v3H2zm9 0h1v2H9zm3 0h2v1h-2zm3 0h1v1h-1zm2 0h2v1h-2zm4 0h2v1h-2zm-8 1h1v1H9zm3 0h1v1h-1zm3 0h1v1h-1zm3 0h2v1h-2zm-9 1h1v1H8zm2 0h2v1h-2zm4 0h1v1h-1zm3 0h2v1h-2zm-9 1h3v1H8zm4 0h2v1h-2zm3 0h1v1h-1zm-7 1h1v1H8zm2 0h1v1h-1zm3 0h2v1h-2zm3 0h2v1h-2z"/>
+            </svg>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleFullscreen() {
+      const elem = document.getElementById('tvStage');
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => {
+          alert(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>

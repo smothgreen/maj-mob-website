@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Cow Event Post Staging | Maj Mob</title>
+  <link rel="shortcut icon" href="_assets/images/logo.jpg?v=3">
+  <link rel="icon" href="_assets/images/logo.jpg?v=3" sizes="192x192">
+  <link rel="apple-touch-icon" href="_assets/images/logo.jpg?v=3" sizes="180x180">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #5c2d91;
+      --primary-dark: #3c166d;
+      --secondary: #ff5a5f;
+      --accent-red: #d12e2e;
+      --bg-dark: #121214;
+      --card-bg: #1e1e24;
+      --border-color: #33333b;
+      --text-light: #f5f5f7;
+      --text-muted: #a1a1aa;
+      --text-active: #ffffff;
+      --instagram-bg: #ffffff;
+      --instagram-text: #262626;
+      --instagram-border: #efefef;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      padding: 2.5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .header-bar {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .header-bar h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a78bfa 0%, #ff7e79 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .header-bar p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* Left Side: Caption Choices & Details */
+    .controls-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-card {
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .option-card:hover {
+      border-color: #6d28d9;
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-2px);
+    }
+
+    .option-card.selected {
+      border-color: #a78bfa;
+      background: rgba(167, 139, 250, 0.08);
+      box-shadow: 0 0 15px rgba(167, 139, 250, 0.15);
+    }
+
+    .option-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .option-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      background: var(--primary);
+      color: var(--text-light);
+    }
+
+    .option-card.selected .option-badge {
+      background: #8b5cf6;
+    }
+
+    .option-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    .option-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .btn-action-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-copy {
+      flex: 1;
+      background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+      transition: all 0.2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-copy:hover {
+      background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(109, 40, 217, 0.4);
+    }
+
+    .btn-copy:active {
+      transform: translateY(1px);
+    }
+
+    /* Right Side: Instagram Card Mockup */
+    .instagram-card {
+      background: var(--instagram-bg);
+      border: 1px solid var(--instagram-border);
+      border-radius: 12px;
+      overflow: hidden;
+      color: var(--instagram-text);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--instagram-border);
+    }
+
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 12px;
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      padding: 2px;
+    }
+
+    .profile-pic-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: white;
+      background-image: url('_assets/images/logo.jpg?v=3');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .username {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .location {
+      font-size: 0.75rem;
+      color: #606060;
+    }
+
+    /* Graphic block */
+    .card-image-container {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Card Actions (Like, Comment, Share) */
+    .card-actions {
+      padding: 12px 16px 8px 16px;
+      display: flex;
+      gap: 16px;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .icon-heart { color: #262626; cursor: pointer; }
+    .icon-comment { color: #262626; cursor: pointer; }
+    .icon-share { color: #262626; cursor: pointer; }
+
+    /* Caption Section */
+    .card-caption-section {
+      padding: 0 16px 16px 16px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .likes {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+    }
+
+    .caption-content {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .caption-username {
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(92, 45, 145, 0.95);
+      border: 1px solid #a78bfa;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      color: white;
+      padding: 0.8rem 1.6rem;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      bottom: 3rem;
+    }
+
+    .venue-badge-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .red-cow-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      color: white;
+      font-weight: 800;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 10px rgba(209, 46, 46, 0.4);
+    }
+
+    .badge-text {
+      flex: 1;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .badge-text strong {
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-bar">
+      <h1>St. Paul Red Cow Class Staging</h1>
+      <p>Review the professional Instagram/Facebook flyer graphic and copy-written caption variations below. Tap any option to load its text preview, then copy it directly to your clipboard.</p>
+    </div>
+
+    <div class="main-grid">
+      
+      <!-- Left side: Select Caption Option -->
+      <div class="controls-panel">
+        <h2 class="panel-title">
+          <span>📝</span> Select Caption Vibe
+        </h2>
+        
+        <div class="options-list">
+          
+          <div class="option-card selected" onclick="selectOption(1)" id="opt-1">
+            <div class="option-header">
+              <span class="option-title">Option 1: Exclusive / "Spots Opened"</span>
+              <span class="option-badge">Recommended</span>
+            </div>
+            <p class="option-desc">Perfect balance of urgency and high demand. Frames remaining seats as "just opened" opportunities, preventing a desperate feel while maximizing FOMO.</p>
+          </div>
+
+          <div class="option-card" onclick="selectOption(2)" id="opt-2">
+            <div class="option-header">
+              <span class="option-title">Option 2: Mid-Week Social Escape</span>
+              <span class="option-badge" style="background:#0284c7;">Social Vibe</span>
+            </div>
+            <p class="option-desc">Focuses heavily on the social elements—meeting friends, learning a new game, and enjoying delicious happy hour drinks and appetizers at Red Cow.</p>
+          </div>
+
+          <div class="option-card" onclick="selectOption(3)" id="opt-3">
+            <div class="option-header">
+              <span class="option-title">Option 3: Last Call Urgency</span>
+              <span class="option-badge" style="background:#d97706;">Last Call</span>
+            </div>
+            <p class="option-desc">Direct call-to-action that creates immediate urgency. Warns that registration closes tonight, enticing last-minute signups.</p>
+          </div>
+
+        </div>
+
+        <div class="btn-action-group">
+          <button class="btn-copy" onclick="copyCaptionText()">
+            <span>📋</span> Copy Selected Caption
+          </button>
+        </div>
+
+        <div class="venue-badge-bar">
+          <div class="red-cow-badge">🐄</div>
+          <div class="badge-text">
+            <strong>Location Highlight:</strong> Red Cow - St. Paul (393 Selby Ave). Free happy hour drink and appetizers are included in the 101 registration! Link: <code>square.link/u/rJy8Zo1T</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Instagram mockup preview -->
+      <div>
+        <div class="instagram-card">
+          <div class="card-header">
+            <div class="profile-pic">
+              <div class="profile-pic-inner"></div>
+            </div>
+            <div class="user-info">
+              <span class="username">majmob</span>
+              <span class="location">Red Cow - St. Paul</span>
+            </div>
+          </div>
+
+          <div class="card-image-container">
+            <img src="_assets/media/red-cow-flyer.jpg" alt="Maj 101 Red Cow Flyer" class="card-image">
+          </div>
+
+          <div class="card-actions">
+            <span class="icon-heart" onclick="toggleHeart(this)">🤍</span>
+            <span class="icon-comment">💬</span>
+            <span class="icon-share">✈️</span>
+          </div>
+
+          <div class="card-caption-section">
+            <div class="likes">Liked by minimahjer and 84 others</div>
+            <div class="caption-content"><span class="caption-username">majmob</span><span id="preview-text">Loading...</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Caption copied to clipboard!</div>
+
+  <script>
+    const captions = {
+      1: `🀄 **ST. PAUL: A FEW SPOTS JUST OPENED!** 🀄
+
+We had a couple of seats open up for tomorrow’s Maj 101 class at Red Cow - St. Paul! If you’ve been waiting to learn this addictive game, this is your sign to grab a friend and join us. 
+
+Here’s the deal:
+📅 Tomorrow (Wednesday, July 22)
+⏰ 2:00 PM - 4:00 PM
+📍 Red Cow - St. Paul (Cathedral Hill)
+🍷 Bonus: Your ticket includes a happy hour drink & delicious appetizers!
+
+Mahjong, appetizers, and drinks—the perfect mid-week escape. 🧩✨ These last spots will go fast, so claim yours now!
+
+🔗 Register via link in bio: square.link/u/rJy8Zo1T
+
+#MahJonggTwinCities #Maj101 #RedCowStPaul #TwinCitiesEvents #LearnMahjong #StPaulMN #HappyHourMahj #MajMob`,
+
+      2: `🍷 **Appetizers, happy hour drinks, and Mahjong... name a better combo.** 🀄
+
+We are heading to Red Cow St. Paul tomorrow (Wednesday, July 22) for our Maj 101 class from 2:00 PM - 4:00 PM. We have just a couple of seats left at the table! 
+
+Whether you’re a complete beginner or need a refresher, we've got you covered. Plus, you get to sip, snack, and socialize in a relaxed, upscale setting.
+
+Avoid the FOMO and grab one of the remaining spots before they fill up!
+
+🔗 Claims your seat: square.link/u/rJy8Zo1T (link in bio)
+
+#MajMob #TwinCitiesSocial #StPaulHappyHour #CathedralHill #MahjongCommunity #TavernGames #MidweekPlans #StPaulEvents`,
+
+      3: `🚨 **LAST CALL: St. Paul Maj 101 tomorrow!** 🀄
+
+We’re kicking off our Maj 101 class at Red Cow - St. Paul tomorrow, Wednesday, July 22 at 2:00 PM. 
+
+Tickets include full instruction, plus a happy hour drink and appetizers. 🍹🥨 It’s the ultimate way to spend your Wednesday afternoon. 
+
+We only have a few chairs left, and we want to fill the table! Snag yours before registration closes tonight.
+
+🔗 Secure your spot: square.link/u/rJy8Zo1T (link in bio)
+
+#LearnMahJongg #TwinCitiesFoodies #CathedralHillStPaul #RedCowMN #MahjongTime #StPaulBites #MajMob`
+    };
+
+    let selectedOptionId = 1;
+
+    function selectOption(id) {
+      selectedOptionId = id;
+      
+      // Update selected cards styling
+      document.querySelectorAll('.option-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      document.getElementById('opt-' + id).classList.add('selected');
+      
+      // Update preview card
+      document.getElementById('preview-text').innerText = captions[id];
+    }
+
+    function toggleHeart(element) {
+      if (element.innerText === '🤍') {
+        element.innerText = '❤️';
+      } else {
+        element.innerText = '🤍';
+      }
+    }
+
+    function copyCaptionText() {
+      const textToCopy = captions[selectedOptionId];
+      
+      function fallbackCopyText(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          const successful = document.execCommand('copy');
+          if (successful) {
+            showToast();
+          } else {
+            console.error('Fallback copy command failed');
+            alert('Failed to copy. Please copy manually.');
+          }
+        } catch (err) {
+          console.error('Fallback copy failed', err);
+          alert('Failed to copy. Please copy manually.');
+        }
+
+        document.body.removeChild(textArea);
+      }
+
+      function showToast() {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2000);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy)
+          .then(showToast)
+          .catch(() => fallbackCopyText(textToCopy));
+      } else {
+        fallbackCopyText(textToCopy);
+      }
+    }
+
+    // Set initial text
+    selectOption(1);
+  </script>
+</body>
+</html>

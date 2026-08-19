@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9GJQDJCNE6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9GJQDJCNE6');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worksheet Builder | Maj Mob Mah Jongg Twin Cities</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Cinzel:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="study.css">
+</head>
+<body class="study-body">
+
+  <!-- Header Section (Screen Only) -->
+  <header id="header" class="screen-only">
+    <div class="container nav-container">
+      <a href="index.html" class="logo-link" id="nav-logo" aria-label="Maj Mob Home">
+        <img src="_assets/images/logo.jpg" alt="Maj Mob Logo" id="logo-img">
+        <span>Maj Mob</span>
+      </a>
+      
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html#about" class="nav-link">About Us</a></li>
+          <li><a href="index.html#classes" class="nav-link">Classes</a></li>
+          <li><a href="kids.html" class="nav-link">Mini Mahj</a></li>
+          <li><a href="private.html" class="nav-link">Private Classes</a></li>
+          <li><a href="index.html#schedule" class="nav-link">Mob Around Town</a></li>
+          <li><a href="study.html" class="nav-link active">Worksheet Builder</a></li>
+          <li><a href="index.html#contact" class="btn btn-secondary" style="color: white; padding: 0.5rem 1.5rem; min-height: auto;">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="study-main">
+    
+    <!-- Control Panel (Screen Only) -->
+    <section class="control-panel-section screen-only">
+      <div class="container">
+        <div class="control-card">
+          <h2>Maj Mob Worksheet & Lesson Builder</h2>
+          <p class="lead-text">
+            Build and print custom worksheets for your classes using traditional tiles. Customize the headline text, fonts, and colors, choose a preset hand or build your own, and press **Print** to export a clean, logo-free letter page.
+          </p>
+          
+          <div class="controls-grid">
+            
+            <!-- Column 1: Presets -->
+            <div class="control-group">
+              <label for="preset-select">Select a Lesson Preset</label>
+              <select id="preset-select">
+                <option value="even_steven_triplets" selected>Even Steven (Triplets): 222 444 666 888</option>
+                <option value="even_steven_pairs">Even Steven (Pairs): 22 44 66 88</option>
+                <option value="even_steven_mixed">Even Steven (Pairs Mixed): 22 44 66 88</option>
+                <option value="even_steven_flowers">Even Steven (Flowers): FFFF 2468</option>
+                <option value="make_match_1">Make Me a Match (1st line): 1111 1111</option>
+                <option value="make_match_2">Make Me a Match (2nd line): FF 11 11 11</option>
+                <option value="easy_run_1">Easy as 1, 2, 3 (Pairs Run): 11 22 33 44</option>
+                <option value="easy_run_2">Easy as 1, 2, 3 (Dragons Run): FF 11 22 DD</option>
+                <option value="easy_run_3">Easy as 1, 2, 3 (Triplets Run): 111 22 333</option>
+                <option value="odd_ball_1">Odd Ball (1st line): 111 33 555</option>
+                <option value="odd_ball_2">Odd Ball (last line): FF 55 77 99</option>
+                <option value="winds_dragons_1">Winds, Dragons, & Flowers (Pairs): NN EE WW SS</option>
+                <option value="winds_dragons_2">Winds, Dragons, & Flowers (NEWS): DD NEWS DD</option>
+                <option value="winds_dragons_3">Winds, Dragons, & Flowers (FF DD DD DD): FF DD DD DD</option>
+                <option value="fine_369_1">369 is Mighty Fine (top line): 333 66 999</option>
+                <option value="fine_369_2">369 is Mighty Fine (last line): FF 33 66 99</option>
+                <option value="custom">-- Custom Row Builder --</option>
+              </select>
+            </div>
+            
+            <!-- Column 2: Typography -->
+            <div class="control-group">
+              <label for="font-select">Headline Font</label>
+              <select id="font-select">
+                <option value="Outfit" selected>Outfit (Modern Sans)</option>
+                <option value="Playfair Display">Playfair Display (Elegant Serif)</option>
+                <option value="Cinzel">Cinzel (Classic Roman Serif)</option>
+                <option value="Montserrat">Montserrat (Geometric Sans)</option>
+                <option value="Inter">Inter (Clean Neutral)</option>
+              </select>
+            </div>
+
+            <!-- Column 3: Color -->
+            <div class="control-group">
+              <label for="color-select">Headline Color</label>
+              <select id="color-select">
+                <option value="#000000" selected>Black (Classic)</option>
+                <option value="#3F148D">Maj Mob Deep Purple</option>
+                <option value="#FA1B7A">Maj Mob Hot Pink</option>
+                <option value="#003366">Navy Blue</option>
+                <option value="#006644">Pine Green</option>
+                <option value="#FD7806">Tile Orange</option>
+              </select>
+            </div>
+            
+            <!-- Column 4: Card Settings -->
+            <div class="control-group">
+              <label for="border-style-select">Tile Outline Style</label>
+              <select id="border-style-select">
+                <option value="solid" selected>Solid Border</option>
+                <option value="dashed">Dashed Border (Cut-out Guide)</option>
+                <option value="dotted">Dotted Border</option>
+                <option value="none">No Border</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="headline-custom-inputs">
+            <div class="input-item">
+              <label for="title-input">Subheading / Description</label>
+              <input type="text" id="title-input" value="Even Steven (1st line, option 1)">
+            </div>
+            <div class="input-item">
+              <label for="pattern-input">Main Pattern Hand</label>
+              <input type="text" id="pattern-input" value="222 444 666 888">
+            </div>
+          </div>
+
+          <!-- Custom Builder Area (Hidden unless custom is selected) -->
+          <div id="custom-builder-area" style="display: none; border-top: 1px solid var(--border-color); padding-top: 1.5rem; margin-top: 1.5rem;">
+            <h3>Custom Tile Selection</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Click on tiles below to add them to your active custom row. Select a row to build first.
+            </p>
+            <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+              <strong>Active Row:</strong>
+              <label class="radio-label"><input type="radio" name="active-row" value="1" checked> Row 1 (Craks)</label>
+              <label class="radio-label"><input type="radio" name="active-row" value="2"> Row 2 (Dots)</label>
+              <label class="radio-label"><input type="radio" name="active-row" value="3"> Row 3 (Bams)</label>
+              <button id="clear-rows-btn" class="btn btn-outline" style="padding: 0.3rem 1rem; min-height: auto; font-size: 0.9rem; margin-left: auto;">Clear Rows</button>
+            </div>
+            
+            <div class="tile-picker-container">
+              <!-- JS will populate with dots, craks, bams, winds, dragons, jokers -->
+            </div>
+          </div>
+          
+          <div class="control-actions" style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+            <button id="reset-btn" class="btn btn-outline">Reset to Preset</button>
+            <button id="print-btn" class="btn btn-primary" style="color: white;">Print Worksheet</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Printable Paper Area -->
+    <section class="paper-section">
+      <!-- Standard US Letter size container (8.5in x 11in) -->
+      <div class="letter-page" id="letter-page-container">
+        
+        <!-- Header Text (No logos per user request) -->
+        <div class="worksheet-header">
+          <h2 id="worksheet-title" style="font-family: 'Outfit', sans-serif; color: #000000;">Even Steven (1st line, option 1)</h2>
+          <h1 id="worksheet-pattern" style="font-family: 'Outfit', sans-serif; color: #000000;">222 444 666 888</h1>
+        </div>
+        
+        <!-- Tile Rows Grid Container -->
+        <div class="tile-rows-container">
+          
+          <!-- Row 1 -->
+          <div class="tile-row-wrapper" id="row-wrapper-1">
+            <div class="tile-row-grid" id="tile-grid-1">
+              <!-- JS will populate with tiles -->
+            </div>
+          </div>
+          
+          <!-- Row 2 -->
+          <div class="tile-row-wrapper" id="row-wrapper-2">
+            <div class="tile-row-grid" id="tile-grid-2">
+              <!-- JS will populate with tiles -->
+            </div>
+          </div>
+          
+          <!-- Row 3 -->
+          <div class="tile-row-wrapper" id="row-wrapper-3">
+            <div class="tile-row-grid" id="tile-grid-3">
+              <!-- JS will populate with tiles -->
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Footer / Class Reference Info (No Maj Mob logos or URLs to keep it generic, but clean layout) -->
+        <div class="worksheet-footer">
+          <span>Find the tiles on the table and match them up!</span>
+          <span class="footer-page-num">Page 1</span>
+        </div>
+        
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JS Scripts -->
+  <script src="app.js" class="screen-only"></script>
+  <script src="study.js"></script>
+</body>
+</html>

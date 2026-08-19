@@ -578,6 +578,10 @@ header.scrolled .logo-link img {
   background-color: var(--secondary);
 }
 
+.class-card.level-guided::after {
+  background-color: var(--accent-tile);
+}
+
 .class-card.level-combo::after {
   background-color: var(--accent-tile);
 }
@@ -610,6 +614,11 @@ header.scrolled .logo-link img {
   color: var(--secondary);
 }
 
+.class-card.level-guided .class-tag {
+  background-color: rgba(253, 120, 6, 0.12);
+  color: var(--accent-tile);
+}
+
 .class-card.level-combo .class-tag {
   background-color: rgba(253, 120, 6, 0.1);
   color: var(--accent-tile);
@@ -631,6 +640,10 @@ header.scrolled .logo-link img {
 
 .class-card.level-2 h3 {
   color: var(--secondary);
+}
+
+.class-card.level-guided h3 {
+  color: var(--accent-tile);
 }
 
 .class-card.level-combo h3 {
