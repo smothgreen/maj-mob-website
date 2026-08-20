@@ -719,13 +719,14 @@ header.scrolled .logo-link img {
 }
 
 .schedule-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 2rem;
+  columns: 2 360px;
+  column-gap: 2rem;
   margin-bottom: 3rem;
 }
 
 .event-card {
+  break-inside: avoid;
+  margin-bottom: 2rem;
   background-color: var(--bg-white);
   border-radius: var(--border-radius-md);
   border: 1px solid var(--border-color);
