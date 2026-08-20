@@ -723,6 +723,7 @@ header.scrolled .logo-link img {
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
+  align-items: start;
 }
 
 .event-card {
