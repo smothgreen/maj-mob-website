@@ -15,12 +15,7 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
         for (let registration of registrations) {
-          registration.unregister().then(function(success) {
-            if (success) {
-              console.log('Unregistered old Canva service worker.');
-              window.location.reload();
-            }
-          });
+          registration.unregister();
         }
       });
     }
@@ -49,7 +44,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=20260821restored">
+  <link rel="stylesheet" href="style.css?v=20260821cal">
 </head>
 <body>
 
@@ -305,6 +300,43 @@
           <p class="classes-intro">
             We bring our beginner-friendly Mah Jongg lessons to breweries, cafes, country clubs, and retail shops in the Twin Cities. Find an upcoming public class near you!
           </p>
+        </div>
+
+        <!-- Schedule View Switcher & Access Key Toolbar -->
+        <div class="schedule-toolbar reveal" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; background: var(--bg-white); padding: 0.85rem 1.25rem; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+          
+          <!-- View Mode Switcher -->
+          <div class="schedule-view-tabs" style="display: flex; gap: 0.5rem;">
+            <button id="view-tab-cards" class="view-tab-btn active" style="padding: 0.45rem 1.1rem; border-radius: var(--border-radius-sm); font-weight: 700; font-size: 0.9rem; border: 1.5px solid var(--primary); background: var(--primary); color: #fff; cursor: pointer; transition: all 0.2s ease;">🎴 Venue Cards</button>
+            <button id="view-tab-calendar" class="view-tab-btn" style="padding: 0.45rem 1.1rem; border-radius: var(--border-radius-sm); font-weight: 700; font-size: 0.9rem; border: 1.5px solid var(--border-color); background: transparent; color: var(--text-dark); cursor: pointer; transition: all 0.2s ease;">📅 Monthly Calendar</button>
+          </div>
+
+          <!-- Color Key Legend -->
+          <div class="schedule-key-legend" style="display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; font-size: 0.88rem; font-weight: 600;">
+            <span style="color: var(--text-muted);">Access Key:</span>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #0d9488;"></span>
+              <span style="color: #0f766e;">Open to Public</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #1e3a8a;"></span>
+              <span style="color: #1e3a8a;">Private Club 🔒</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Monthly Calendar View Container (Toggled via tab) -->
+        <div id="calendar-view-container" class="reveal" style="display: none; margin-top: 1rem; margin-bottom: 2.5rem;">
+          <div class="calendar-header-nav" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; background: var(--bg-white); padding: 1rem 1.25rem; border-radius: var(--border-radius-md); border: 1px solid var(--border-color);">
+            <button id="cal-prev-btn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.9rem; min-height: auto;">&larr; Previous Month</button>
+            <h3 id="cal-title-heading" style="margin: 0; color: var(--primary); font-size: 1.3rem;">October 2026</h3>
+            <button id="cal-next-btn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.9rem; min-height: auto;">Next Month &rarr;</button>
+          </div>
+
+          <div id="calendar-grid-mount" class="calendar-grid-wrapper">
+            <!-- Dynamically rendered by app.js -->
+          </div>
         </div>
 
         <!-- Filter Controls -->
@@ -827,6 +859,6 @@
   </footer>
 
   <!-- Script Behavior -->
-  <script src="app.js?v=20260821restored"></script>
+  <script src="app.js?v=20260821cal"></script>
 </body>
 </html>

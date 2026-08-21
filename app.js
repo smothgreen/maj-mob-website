@@ -319,5 +319,182 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ==========================================================================
+  // Schedule View Mode Switcher (Venue Cards vs Monthly Calendar)
+  // ==========================================================================
+  const tabCardsBtn = document.getElementById('view-tab-cards');
+  const tabCalendarBtn = document.getElementById('view-tab-calendar');
+  const scheduleFilterControls = document.querySelector('.schedule-controls');
+  const scheduleGrid = document.getElementById('schedule-grid');
+  const calendarViewContainer = document.getElementById('calendar-view-container');
+
+  if (tabCardsBtn && tabCalendarBtn) {
+    tabCardsBtn.addEventListener('click', () => {
+      tabCardsBtn.classList.add('active');
+      tabCalendarBtn.classList.remove('active');
+      tabCardsBtn.style.backgroundColor = 'var(--primary)';
+      tabCardsBtn.style.color = '#fff';
+      tabCalendarBtn.style.backgroundColor = 'transparent';
+      tabCalendarBtn.style.color = 'var(--text-dark)';
+      
+      if (scheduleFilterControls) scheduleFilterControls.style.display = 'flex';
+      if (scheduleGrid) scheduleGrid.style.display = 'grid';
+      if (calendarViewContainer) calendarViewContainer.style.display = 'none';
+    });
+
+    tabCalendarBtn.addEventListener('click', () => {
+      tabCalendarBtn.classList.add('active');
+      tabCardsBtn.classList.remove('active');
+      tabCalendarBtn.style.backgroundColor = 'var(--primary)';
+      tabCalendarBtn.style.color = '#fff';
+      tabCardsBtn.style.backgroundColor = 'transparent';
+      tabCardsBtn.style.color = 'var(--text-dark)';
+      
+      if (scheduleFilterControls) scheduleFilterControls.style.display = 'none';
+      if (scheduleGrid) scheduleGrid.style.display = 'none';
+      if (calendarViewContainer) calendarViewContainer.style.display = 'block';
+      renderCalendar();
+    });
+  }
+
+  // ==========================================================================
+  // Calendar Engine & Dynamic Event Extractor
+  // ==========================================================================
+  let currentCalDate = new Date(2026, 9, 1); // Default to October 2026
+
+  const extractAllEvents = () => {
+    const events = [];
+    const cards = document.querySelectorAll('.event-card');
+
+    cards.forEach(card => {
+      const venueName = card.querySelector('.event-venue')?.textContent.trim() || 'Class Venue';
+      const rawLocationType = card.getAttribute('data-location');
+      const locationType = rawLocationType === 'private-club' ? 'private-club' : 'public';
+      
+      const dateRows = card.querySelectorAll('[data-date]');
+      dateRows.forEach(row => {
+        const dateStr = row.getAttribute('data-date');
+        if (!dateStr || row.classList.contains('btn')) return;
+
+        const titleEl = row.querySelector('.event-name');
+        const timeEl = row.querySelector('.event-time');
+
+        const title = titleEl ? titleEl.textContent.trim() : 'Mahjong Class';
+        const time = timeEl ? timeEl.textContent.trim() : '';
+
+        events.push({
+          date: dateStr,
+          venue: venueName,
+          title: title,
+          time: time,
+          type: locationType
+        });
+      });
+    });
+
+    return events;
+  };
+
+  const renderCalendar = () => {
+    const gridMount = document.getElementById('calendar-grid-mount');
+    const calHeading = document.getElementById('cal-title-heading');
+    if (!gridMount || !calHeading) return;
+
+    const year = currentCalDate.getFullYear();
+    const month = currentCalDate.getMonth();
+
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    calHeading.textContent = `${monthNames[month]} ${year}`;
+
+    const allEvents = extractAllEvents();
+    
+    const firstDayIndex = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let gridHTML = `
+      <div class="cal-grid-header">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+      </div>
+      <div class="cal-grid-days">
+    `;
+
+    for (let i = 0; i < firstDayIndex; i++) {
+      gridHTML += `<div class="cal-day-cell other-month"></div>`;
+    }
+
+    const agendaEvents = [];
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const formattedMonth = String(month + 1).padStart(2, '0');
+      const formattedDay = String(day).padStart(2, '0');
+      const dateStr = `${year}-${formattedMonth}-${formattedDay}`;
+
+      const dayEvents = allEvents.filter(e => e.date === dateStr);
+      const hasEvents = dayEvents.length > 0;
+
+      gridHTML += `<div class="cal-day-cell ${hasEvents ? 'has-events' : ''}">`;
+      gridHTML += `<div class="cal-day-number">${day}</div>`;
+      gridHTML += `<div class="cal-events-list">`;
+
+      dayEvents.forEach(evt => {
+        agendaEvents.push({ ...evt, dayDisplay: day });
+        const typeClass = evt.type === 'private-club' ? 'private-club' : 'public';
+        const typeBadge = evt.type === 'private-club' ? '🔒 ' : '';
+        gridHTML += `
+          <a href="#schedule-grid" onclick="document.getElementById('view-tab-cards').click();" class="cal-event-pill ${typeClass}" title="${evt.venue}: ${evt.title} (${evt.time})">
+            ${typeBadge}<strong>${evt.venue}</strong>: ${evt.title}
+          </a>
+        `;
+      });
+
+      gridHTML += `</div></div>`;
+    }
+
+    gridHTML += `</div>`; // end cal-grid-days
+
+    // Agenda view for mobile
+    gridHTML += `<div class="cal-agenda-view" style="margin-top: 1rem;">`;
+    if (agendaEvents.length === 0) {
+      gridHTML += `<p style="text-align:center; color:var(--text-muted); padding:1.5rem;">No classes scheduled for this month.</p>`;
+    } else {
+      agendaEvents.forEach(evt => {
+        const typeClass = evt.type === 'private-club' ? 'private-club' : 'public';
+        const typeLabel = evt.type === 'private-club' ? 'Private Club 🔒' : 'Open to Public';
+        gridHTML += `
+          <div class="cal-agenda-item ${typeClass}">
+            <div>
+              <strong style="color:var(--primary); display:block; font-size:0.95rem;">${monthNames[month]} ${evt.dayDisplay}, ${year} &bull; ${evt.venue}</strong>
+              <span style="font-size:0.88rem; color:#475569;">${evt.title} (${evt.time})</span>
+            </div>
+            <span class="legend-badge ${typeClass}" style="font-size:0.75rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:12px; background:${evt.type==='private-club'?'#eff6ff':'#e6f4f1'}; color:${evt.type==='private-club'?'#1e3a8a':'#0f766e'};">${typeLabel}</span>
+          </div>
+        `;
+      });
+    }
+    gridHTML += `</div>`; // end cal-agenda-view
+
+    gridMount.innerHTML = gridHTML;
+  };
+
+  const calPrevBtn = document.getElementById('cal-prev-btn');
+  const calNextBtn = document.getElementById('cal-next-btn');
+
+  if (calPrevBtn && calNextBtn) {
+    calPrevBtn.addEventListener('click', () => {
+      currentCalDate.setMonth(currentCalDate.getMonth() - 1);
+      renderCalendar();
+    });
+
+    calNextBtn.addEventListener('click', () => {
+      currentCalDate.setMonth(currentCalDate.getMonth() + 1);
+      renderCalendar();
+    });
+  }
+
 });
+
 
