@@ -126,6 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Ensure column wrappers hide if all inner cards are hidden
+    document.querySelectorAll('.schedule-col').forEach(col => {
+      const hasVisibleChild = Array.from(col.children).some(child => child.style.display !== 'none');
+      col.style.display = hasVisibleChild ? 'flex' : 'none';
+    });
+
     // Toggle "No upcoming events" fallback message
     if (noEventsMsg) {
       noEventsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
