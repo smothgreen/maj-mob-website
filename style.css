@@ -719,62 +719,64 @@ header.scrolled .logo-link img {
 }
 
 .schedule-grid {
-  columns: 2 360px;
-  column-gap: 2rem;
-  margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+  align-items: start;
 }
 
 .event-card {
-  break-inside: avoid;
-  margin-bottom: 2rem;
   background-color: var(--bg-white);
   border-radius: var(--border-radius-md);
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
-  padding: 2rem;
+  padding: 1.15rem 1.25rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   transition: var(--transition-smooth);
+  margin-bottom: 0;
 }
 
 .event-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: var(--primary);
 }
 
 .event-venue {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .event-location {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.6rem;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
 }
 
 .event-classes-list {
   border-top: 1px solid var(--border-color);
-  padding-top: 1rem;
-  margin-bottom: 1.5rem;
+  padding-top: 0.6rem;
+  margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.4rem;
 }
 
 .event-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  padding: 0.15rem 0;
 }
 
 .event-name {
@@ -784,9 +786,9 @@ header.scrolled .logo-link img {
 
 .event-time {
   background-color: rgba(0, 0, 0, 0.04);
-  padding: 0.2rem 0.6rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
 }
 
@@ -794,8 +796,8 @@ header.scrolled .logo-link img {
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
   color: var(--secondary);
-  font-size: 1.05rem;
-  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
 }
 
 .event-card .btn {
@@ -803,8 +805,8 @@ header.scrolled .logo-link img {
 }
 
 .event-note {
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   font-style: italic;
   text-align: center;
