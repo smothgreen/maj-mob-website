@@ -92,6 +92,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateScheduleDisplay = (filterValue = 'all') => {
     let visibleCount = 0;
 
+    // Control Martinis & Mahjong featured event panel visibility
+    const martinisPanel = document.getElementById('martinis-and-mahjong');
+    if (martinisPanel) {
+      if (filterValue === 'all' || filterValue === 'open-play' || filterValue === 'private-club' || filterValue === 'stpaul') {
+        martinisPanel.style.display = 'block';
+      } else {
+        martinisPanel.style.display = 'none';
+      }
+    }
+
     eventCards.forEach(card => {
       const endDate = parseDate(card.getAttribute('data-end-date'));
       const cardLocation = card.getAttribute('data-location');
@@ -105,12 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isPast = (endDate && endDate < now) || allRowsPast;
 
+      // Check if card contains Open Play or Special Alumni Events
+      const hasOpenPlayOrEvent = Array.from(card.querySelectorAll('.event-name')).some(el => {
+        const text = el.textContent.toLowerCase();
+        return text.includes('open play') || text.includes('martinis') || text.includes('special event');
+      });
+
       card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
 
       if (isPast) {
         card.style.display = 'none';
         card.classList.add('is-past-card');
-      } else if (filterValue === 'all' || cardLocation === filterValue) {
+      } else if (filterValue === 'all' || cardLocation === filterValue || (filterValue === 'open-play' && hasOpenPlayOrEvent)) {
         visibleCount++;
         card.style.display = 'flex';
         setTimeout(() => {
