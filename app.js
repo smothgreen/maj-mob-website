@@ -115,10 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isPast = (endDate && endDate < now) || allRowsPast;
 
-      // Check if card contains Open Play or Special Alumni Events
+      // Check if card contains Open Play, Pickleball, or Special Alumni Events
       const hasOpenPlayOrEvent = Array.from(card.querySelectorAll('.event-name')).some(el => {
         const text = el.textContent.toLowerCase();
-        return text.includes('open play') || text.includes('martinis') || text.includes('special event');
+        return text.includes('open play') || text.includes('martinis') || text.includes('special event') || text.includes('pickleball') || text.includes('combo');
       });
 
       card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
