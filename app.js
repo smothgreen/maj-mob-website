@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     eventCards.forEach(card => {
+      const cardText = card.textContent.toLowerCase();
       const endDate = parseDate(card.getAttribute('data-end-date'));
       const cardLocation = card.getAttribute('data-location');
       
@@ -113,10 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return d && d < now;
       });
 
-      const isPast = (endDate && endDate < now) || allRowsPast;
+      // Force active status for upcoming featured events (Chips & Pool/Yacht)
+      const isSpecialEventCard = cardText.includes('pickleball') || cardText.includes('pool and yacht');
+      const isPast = !isSpecialEventCard && ((endDate && endDate < now) || allRowsPast);
 
       // Check if card contains Open Play, Pickleball, or Special Events
-      const cardText = card.textContent.toLowerCase();
       const hasOpenPlayOrEvent = cardText.includes('open play') || cardText.includes('martinis') || cardText.includes('pickleball') || cardText.includes('combo') || cardText.includes('special event');
 
       card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
@@ -129,33 +131,43 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (filterValue === 'all' || matchesLocation || (filterValue === 'open-play' && hasOpenPlayOrEvent)) {
         visibleCount++;
         card.style.display = 'flex';
-        setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0) scale(1)';
-        }, 50);
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0) scale(1)';
       } else {
+        card.style.display = 'none';
         card.style.opacity = '0';
         card.style.transform = 'translateY(10px) scale(0.98)';
-        setTimeout(() => {
-          card.style.display = 'none';
-        }, 300);
       }
     });
 
     // Ensure column wrappers hide if all inner cards are hidden and center grid when filtered
-    const visibleColsList = [];
     document.querySelectorAll('.schedule-col').forEach(col => {
       const hasVisibleChild = Array.from(col.children).some(child => child.style.display !== 'none');
       col.style.display = hasVisibleChild ? 'flex' : 'none';
-      if (hasVisibleChild) visibleColsList.push(col);
     });
 
     const scheduleGrid = document.getElementById('schedule-grid');
     if (scheduleGrid) {
-      if (visibleColsList.length < 3) {
+      if (filterValue === 'open-play') {
+        scheduleGrid.style.display = 'flex';
         scheduleGrid.style.justifyContent = 'center';
+        scheduleGrid.style.flexWrap = 'wrap';
+        scheduleGrid.style.gap = '1.5rem';
+        document.querySelectorAll('.schedule-col').forEach(col => {
+          if (col.style.display !== 'none') {
+            col.style.width = '100%';
+            col.style.maxWidth = '360px';
+          }
+        });
       } else {
+        scheduleGrid.style.display = 'grid';
+        scheduleGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(310px, 1fr))';
         scheduleGrid.style.justifyContent = 'start';
+        scheduleGrid.style.gap = '1.25rem';
+        document.querySelectorAll('.schedule-col').forEach(col => {
+          col.style.width = '';
+          col.style.maxWidth = '';
+        });
       }
     }
 
