@@ -142,11 +142,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Ensure column wrappers hide if all inner cards are hidden
+    // Ensure column wrappers hide if all inner cards are hidden and center grid when filtered
+    const visibleColsList = [];
     document.querySelectorAll('.schedule-col').forEach(col => {
       const hasVisibleChild = Array.from(col.children).some(child => child.style.display !== 'none');
       col.style.display = hasVisibleChild ? 'flex' : 'none';
+      if (hasVisibleChild) visibleColsList.push(col);
     });
+
+    const scheduleGrid = document.getElementById('schedule-grid');
+    if (scheduleGrid) {
+      if (visibleColsList.length < 3) {
+        scheduleGrid.style.justifyContent = 'center';
+      } else {
+        scheduleGrid.style.justifyContent = 'start';
+      }
+    }
 
     // Toggle "No upcoming events" fallback message
     if (noEventsMsg) {
