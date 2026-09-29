@@ -115,18 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isPast = (endDate && endDate < now) || allRowsPast;
 
-      // Check if card contains Open Play, Pickleball, or Special Alumni Events
-      const hasOpenPlayOrEvent = Array.from(card.querySelectorAll('.event-name')).some(el => {
-        const text = el.textContent.toLowerCase();
-        return text.includes('open play') || text.includes('martinis') || text.includes('special event') || text.includes('pickleball') || text.includes('combo');
-      });
+      // Check if card contains Open Play, Pickleball, or Special Events
+      const cardText = card.textContent.toLowerCase();
+      const hasOpenPlayOrEvent = cardText.includes('open play') || cardText.includes('martinis') || cardText.includes('pickleball') || cardText.includes('combo') || cardText.includes('special event');
 
       card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+
+      const matchesLocation = cardLocation && cardLocation.split(' ').includes(filterValue);
 
       if (isPast) {
         card.style.display = 'none';
         card.classList.add('is-past-card');
-      } else if (filterValue === 'all' || cardLocation === filterValue || (filterValue === 'open-play' && hasOpenPlayOrEvent)) {
+      } else if (filterValue === 'all' || matchesLocation || (filterValue === 'open-play' && hasOpenPlayOrEvent)) {
         visibleCount++;
         card.style.display = 'flex';
         setTimeout(() => {
